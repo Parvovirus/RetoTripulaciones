@@ -1,0 +1,15 @@
+const express = require("express");
+const app = express();
+const router = require("./routes/routes");
+const path = require("path");
+require("./database/mongo");
+
+
+app.use(express.json());
+app.use(express.static("public"));
+app.use("/" , router);
+
+
+const port = 5500;
+
+app.listen(port, console.log("en el server"));
