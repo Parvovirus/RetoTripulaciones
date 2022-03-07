@@ -1,25 +1,18 @@
 import './App.css';
 import axios from "axios"
+import React, { useState } from "react";
+import Register from './pages/Register';
+import Login from './pages/Login';
+
 
 function App() {
 
-
-  const test = () => {
-
-
-    const filtro = {
-      nombre: "coke"
-    }
-
-    axios.post("register", filtro).then(res=> console.log(res.data));
-
-  }
-
   return (
     <div className="App">
-      <div>
-        <button onClick={test}>Click</button>
-      </div>
+      
+      <Register />
+      <Login />
+
     </div>
   );
 

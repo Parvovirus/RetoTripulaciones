@@ -4,12 +4,11 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const objetoUserSchema = {
     name: String,
-    firstName: String,
-    secondName: String,
+    lastName: String,
     email: String,
     dni: String,
     password: String,
-    adress: String,
+    address: String,
     cp: String,
     population: String,
     role: Number
