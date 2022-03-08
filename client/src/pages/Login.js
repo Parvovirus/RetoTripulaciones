@@ -13,21 +13,24 @@ function Login() {
             password,
 
         }
-        axios.post("login", filtro).then(res => console.log(res.data));
 
+        axios.post("login", filtro).then((res) => {
+            console.log(res.data);
+        });
     }
+
 
     return (
         <div className="App">
 
             <div>
                 <input type="email" placeholder="email" onChange={(e) => setEmail(e.target.value)} />
-                <input type="password" placeholder="Pass" onChange={(e) => setPassword(e.target.value)} />
-                <button onClick={checkLogin}>Click</button>
+                <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+                <button onClick={checkLogin}>Login</button>
             </div>
         </div>
     );
 
-}
 
+}
 export default Login;

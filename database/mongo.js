@@ -10,7 +10,7 @@ mongoose.connect(url, {
     useUnifiedTopology: true,
 })
     .then(() => {
-        console.log("Base de datos de Mongo conectada");
+        console.log("Connect DateBase");
     })
     .catch((err) => {
         console.error(err);
