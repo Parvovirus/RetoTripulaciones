@@ -12,10 +12,5 @@ router.post("/login", user.login)
 // router.get("/data", user.data)
 
 
-
-
-
-
-
 module.exports = router
 
