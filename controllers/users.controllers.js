@@ -1,77 +1,81 @@
 const mongoose = require("mongoose");
 const userModel = require("../models/users.model");
-const bcrypt = require('bcrypt');
-
-
+const colivingModel = require("../models/coliving.model")
 
 const user = {
     registro: async (req, res) => {
-        const { name, lastName, email, dni, address, population, password, cp } = req.body;
+        const { code, name, tlf, birth } = req.body;
+        console.log(req.body)
 
 
         // ! Expresiones Regulares validaciones:
-        var regExpDni = new RegExp(/^[0-9]{8}\-?[a-zA-Z]{1}/);
-        var regExpName = new RegExp(/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]+$/u); //agregado espacio para poner dos apellidos
-        var regExpEmail = new RegExp(/^[^@]+@[^@]+\.[a-zA-Z]{2,}$/);
-        var regExpPass = new RegExp(/^(?=\w*\d)(?=\w*[a-zA-Z])\S{6,10}$/);
-        var regExpCp = new RegExp(/^(?:0[1-9]\d{3}|[1-4]\d{4}|5[0-2]\d{3})$/);
-        var regExpDir = new RegExp(/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð\d / -]+$/u) //agregado números y el espacio para poner en la dirección
+        // var regExpCode = new RegExp(/\w{10}/);
+        // var regExpName = new RegExp(/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]+$/u);
+        // var regExpBirth = new RegExp(/^(?:3[01]|[12][0-9]|0?[1-9])([\-/.])(0?[1-9]|1[1-2])\1\d{4}$/);
+        // var regExpTlf = new RegExp(/+34|0034|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}/);
 
         //! Zona de validaciones
 
-        const nameOk = regExpName.test(name);
-        const lastNameOk = regExpName.test(lastName);
-        const emailOk = regExpEmail.test(email);
-        const passOk = regExpPass.test(password);
-        const dniOk = regExpDni.test(dni) && validation_dni(dni);
-        const populationOk = regExpDir.test(population);
-        const cpOk = regExpCp.test(cp);
-        const addressOk = regExpDir.test(address);
+        // const codeOk = regExpCode.test(codigo);
+        // const nameOk = regExpName.test(name);
+        // const birthOk = regExpBirth.test(birth);
+        // const tlfOk = regExpTlf.test(tlf);
+        // const tlfOk = true;
 
-        var ok = nameOk && lastNameOk && emailOk && passOk && dniOk && populationOk && cpOk && addressOk;
-
-
+        // var ok = codeOk && nameOk && birthOk && tlfOk;
+        var ok = true;
         if (ok) {
-            const existUser = await userModel.findOne({ email });
-            if (!existUser) {
-                const insertUser = new userModel({
-                    name,
-                    lastName,
-                    email,
-                    dni,
-                    password,
-                    address,
-                    cp,
-                    population
-                })
 
-                insertUser.save();
-                res.json("userRegister")
+            // const insertColiving = new colivingModel({
+            //     code: "2",
+            //     name: "Las Palomas",
+            //     activity: [],
+            //     place: "Las Palomas",
+            //     price: "700",
+            //     img: "http://www.ayto-fuenlabrada.es/recursos/img/TA/prehome/49677_2362362009102135.jpg"
+            // })
+
+            // insertColiving.save();
+
+            const existColiving = await colivingModel.findOne({ code });
+            if (existColiving) {
+
+                const existUser = await userModel.findOne({ tlf });
+                console.log(existUser);
+                if (!existUser) {
+                    const insertUser = new userModel({
+                        name,
+                        lastName,
+                        birth,
+                        tlf,
+                        population,
+                        photo,
+                        idCoHouse,
+                        role: 0
+                    })
+
+                    insertUser.save();
+                    res.json({auth:true})
+                } else {
+                    res.json({auth:false})
+                    console.log("Existe el usuario")
+                }
             } else {
-                res.json("userExist");
-                console.log("Existe el usuario")
+                console.log("codigo Coliving no registrado")
             }
+
         } else {
             if (!nameOk) {
                 res.json("incorrectFormatName")
             }
-            else if (!lastNameOk) {
-                res.json("incorrectFormatlastName")
+            else if (!codigoOk) {
+                res.json("incorrectFormatCode")
             }
-            else if (!emailOk) {
-                res.json("incorrectFormatEmail")
+            else if (!birthOk) {
+                res.json("incorrectFormatBirth")
             }
-            else if (!dniOk) {
-                res.json("incorrectFormatDni")
-            }
-            else if (!passOk) {
-                res.json("incorrectFormatPass")
-            }
-            else if (!cpOk) {
-                res.json("incorrectFormatCp")
-            }
-            else if (!populationOk) {
-                res.json("incorrectFormatPopulation")
+            else if (!tlfOk) {
+                res.json("incorrectFormatTlf")
             }
         }
     },
@@ -92,9 +96,12 @@ const user = {
             res.json("noRegister");
             console.log("No estás registrado en la bd")
         }
+    },
+    search: async (req, res) => {
+        const { population } = req.body;
+        const existUser = await userModel.find({ population });
+        res.json(existUser);
     }
-
-
 }
 
 
