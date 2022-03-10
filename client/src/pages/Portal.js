@@ -1,24 +1,53 @@
-import React from 'react'
-import UsersBanner from '../components/UsersBanner'
+import React, { useState, useEffect } from 'react'
+import CategoryBanner from '../components/CategoryBanner'
 import { Link } from 'react-router-dom'
 import Search from "../components/Search"
 import "./css/Portal.scss"
+import axios from 'axios'
+import Navbar from '../components/Navbar'
+import Recommended from '../components/Recommended'
+
+
+
 const Portal = () => {
+
+
+  // [idNameActivities] = [[id, nombre],[]]
+  const [idNameActivities, setIdActivity] = useState("")
+
+  useEffect(() => {
+    bannerActivities();
+  }, []);
+
+  const bannerActivities = () => {
+
+
+    axios.get("getactivities").then((res) => {
+      let cleanActivity = res.data;
+    
+      let idNameActivity = [];
+
+      for (let i = 0; i < cleanActivity.length; i++) {
+        idNameActivity.push([cleanActivity[i].idActivity , cleanActivity[i].name, cleanActivity[i].banner ]);
+      }
+
+      setIdActivity(idNameActivity);
+    
+    })
+  }
+
   return (
     <div className='Portal'>
-        <Search/>
-        <UsersBanner/>
-        <p>Actividades</p>
+      <Search />
+      <CategoryBanner />
+      <Recommended />
 
-       <Link to={"/act1"}> <div className='Activity act1'>Actividad 1</div></Link>
-       <Link to={"/act2"}><div className='Activity act2'>Actividad 2</div></Link>
-       <Link to={"/act3"}> <div className='Activity act3'>Actividad 3</div></Link>
-   
-
-      
+      <p>Actividades</p>
 
 
+      {idNameActivities ? idNameActivities.map((act, i) => <Link key={i} to={`/act1/${act[0]}`}> <img className='Activity act1' src={act[2]}></img></Link>) : ""}
 
+      <Navbar/>
 
     </div>
   )

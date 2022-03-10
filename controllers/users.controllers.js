@@ -97,8 +97,8 @@ const user = {
     res.json(existUser);
   },
   getUsers: async (req, res) => {
+    console.log("llega");
     const users = await userModel.find();
-
     res.json(users);
   },
   saveActivity: (req, res) => {

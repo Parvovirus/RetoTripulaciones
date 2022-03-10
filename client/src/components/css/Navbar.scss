@@ -1,0 +1,18 @@
+.Navbar {
+    border-top: 1px solid grey;
+
+
+    >ul {
+        width          : 80%;
+        display        : flex;
+        justify-content: space-between;
+        list-style     : none;
+        margin-left    : -2%;
+        padding-bottom : 5%;
+
+        // >li {
+        //     border-right: 1px solid grey;
+        //     padding-right: 5%;
+        // }
+    }
+}
