@@ -3,8 +3,12 @@ const user = require("../controllers/users.controllers")
 
 
 
-router.post("/register", user.registro)
-router.post("/login", user.login)
+router.post("/register", user.registro);
+router.post("/login", user.login);
+router.post("/search", user.search);
+router.get("/getusers",user.getUsers)
+router.get("/saveactivity",user.saveActivity)
+
 // router.post("/delete", user.delete)
 // router.post("/update", user.update)
 // router.post("/insert", user.insert)

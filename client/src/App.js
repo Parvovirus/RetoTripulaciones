@@ -1,18 +1,18 @@
-import './App.css';
+
 import axios from "axios"
 import React, { useState } from "react";
-import Register from './pages/Register';
-import Login from './pages/Login';
+import { BrowserRouter } from 'react-router-dom';
+ 
+ import Main from './components/Main';
 
-
+ import './App.scss';
 function App() {
 
   return (
     <div className="App">
-      
-      <Register />
-      <Login />
-
+<BrowserRouter>
+   <Main/>
+   </BrowserRouter>
     </div>
   );
 

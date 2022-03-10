@@ -3,15 +3,11 @@ import React, { useState } from "react";
 
 function Login() {
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-
+    const [tlf, setTlf] = useState("");
 
     const checkLogin = () => {
         let filtro = {
-            email,
-            password,
-
+            tlf,
         }
 
         axios.post("login", filtro).then((res) => {
@@ -24,9 +20,8 @@ function Login() {
         <div className="App">
 
             <div>
-                <input type="email" placeholder="email" onChange={(e) => setEmail(e.target.value)} />
-                <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-                <button onClick={checkLogin}>Login</button>
+                <input type="text" placeholder="Teléfono" onChange={(e) => setTlf(e.target.value)} />
+                <button onClick={checkLogin}>Iniciar Sesión</button>
             </div>
         </div>
     );

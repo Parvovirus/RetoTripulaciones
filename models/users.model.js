@@ -4,22 +4,25 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const objetoUserSchema = {
     name: String,
-    lastName: String,
-    email: String,
-    dni: String,
-    password: String,
+    age: Number,
     address: String,
-    cp: String,
     population: String,
-    role: Number
+    avatar:String,
+    phone: String,
+    idCoHouse: Number,
+    role: Number,
+    date: String,
+    genere: String,
+    cp: String,
+    activities: Array
+
 };
 
-const userSchema = mongoose.Schema(objetoUserSchema, {versionKey: false})
+const userSchema = mongoose.Schema(objetoUserSchema, { versionKey: false })
 
-userSchema.plugin(AutoIncrement, {inc_field: 'idUser'});
+userSchema.plugin(AutoIncrement, { inc_field: 'idUser' });
 
 const User = mongoose.model("users", userSchema);
-
 
 // para exportar
 module.exports = User;
