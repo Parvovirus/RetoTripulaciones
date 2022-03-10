@@ -4,13 +4,18 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const objetoUserSchema = {
     name: String,
-    age: String,
+    age: Number,
     address: String,
     population: String,
-    photo: String,
-    tlf: String,
+    avatar:String,
+    phone: String,
     idCoHouse: Number,
-    role: Number
+    role: Number,
+    date: String,
+    genere: String,
+    cp: String,
+    activities: Array
+
 };
 
 const userSchema = mongoose.Schema(objetoUserSchema, { versionKey: false })
