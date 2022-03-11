@@ -1,31 +1,53 @@
-import axios from "axios"
-import React, { useState } from "react";
-import "./css/Login.scss"
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import "./css/Login.scss";
+import useAxiosAuth from "../hooks/useAxiosAuth";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
+
 function Login() {
+  const [phone, setPhone] = useState("");
 
-    const [tlf, setTlf] = useState("");
+  const navigate = useNavigate();
 
-    const checkLogin = () => {
-        let filtro = {
-            tlf,
-        }
+  const [user] = useAxiosAuth("datauser");
 
-        axios.post("login", filtro).then((res) => {
-            console.log(res.data);
-        });
+  useEffect(() => {
+    if (user != "") {
+      console.log(user.data.auth);
+
+      if (user.data.auth) {
+        navigate("/portal");
+      } else {
+      }
     }
+  }, [user]);
 
+  const checkLogin = () => {
+    let filtro = {
+      phone,
+    };
 
-    return (
-        <div className="Login">
+    axios.post("login", filtro).then((res) => {
+      const { token, message, status } = res.data;
+      alert(message);
 
-       
-                <input type="text" placeholder="Teléfono" onChange={(e) => setTlf(e.target.value)} />
-                <button onClick={checkLogin}>Iniciar Sesión</button>
-           
-        </div>
-    );
+      if (status == true) {
+        cookies.set("token", token);
+      }
+    });
+  };
 
-
+  return (
+    <div className="Login">
+      <input
+        type="text"
+        placeholder="Teléfono"
+        onChange={(e) => setPhone(e.target.value)}
+      />
+      <button onClick={checkLogin}>Iniciar Sesión</button>
+    </div>
+  );
 }
 export default Login;
