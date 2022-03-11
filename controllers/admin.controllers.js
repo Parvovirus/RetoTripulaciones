@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt');
 
 const user = {
     registro: (req, res) => {
-        console.log("hola");
         res.json(req.body)
         // register(req, res)
     },

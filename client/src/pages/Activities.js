@@ -39,7 +39,6 @@ const Activities = () => {
   const getUsers = () => {
     axios.get("/getusers").then((res) => {
       let cleanUsers = res.data;
-      console.log(cleanUsers)
       let idActivity = idact;
       setAllUsers(res.data)
 
