@@ -9,14 +9,14 @@ function Register() {
   const [viewRegister, setViewRegister] = useState(true)
   const [viewVerification, setViewVerification] = useState(false)
   const [viewFaceId, setViewFaceId] = useState(false)
-
+  const [dataRegisterUser,setDataRegisterUser]=useState("")
  
   return (
 
     <div className="App">
       <div>
 
-        {viewRegister ? (<InfoRegisterUser hidden={setViewRegister} show={setViewVerification} />) : ("")}
+        {viewRegister ? (<InfoRegisterUser saveDataUser={setDataRegisterUser} hidden={setViewRegister} show={setViewVerification} />) : ("")}
         {viewVerification ? (<VerificationCode hidden={setViewVerification} show={setViewFaceId}/>) : ("")}
         {viewFaceId ? (<FaceId />) : ("")}
       </div>

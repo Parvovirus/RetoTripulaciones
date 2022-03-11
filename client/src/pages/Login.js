@@ -1,6 +1,6 @@
 import axios from "axios"
 import React, { useState } from "react";
-
+import "./css/Login.scss"
 function Login() {
 
     const [tlf, setTlf] = useState("");
@@ -17,12 +17,12 @@ function Login() {
 
 
     return (
-        <div className="App">
+        <div className="Login">
 
-            <div>
+       
                 <input type="text" placeholder="Teléfono" onChange={(e) => setTlf(e.target.value)} />
                 <button onClick={checkLogin}>Iniciar Sesión</button>
-            </div>
+           
         </div>
     );
 
