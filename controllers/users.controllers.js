@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const userModel = require("../models/users.model");
 const colivingModel = require("../models/coliving.model");
 const activitiesModel = require("../models/activity.model");
+const jwt = require("jsonwebtoken");
 
 const user = {
   registro: async (req, res) => {
@@ -99,23 +100,19 @@ const user = {
     const checkNameUser = await userModel.find({ name: nameUser });
 
     const checkDate = splitDate[3] > 1972 ? false : true;
-/* 
+    /* 
     const checkExistUser = await userModel.find({phone: checkNameUser.phone}) */
- 
-   
-    if (checkCoHousing=="") {
+
+    if (checkCoHousing == "") {
       res.json({ message: "No existe el co housing" });
-      console.log("no existe")
+      console.log("no existe");
     } else if (!checkNameUser) {
       res.json({ message: "No existe el usuario" });
     } else if (checkDate != true) {
       res.json({ message: "Fecha de usuario no válida" });
     } else {
-
       if (checkCoHousing != "") {
         const checkTlf = checkCoHousing[0].guiatlf.includes(tlfUser);
-
-       
 
         if (checkTlf != true) {
           res.json({ message: "Número de teléfono no válido" });
@@ -123,18 +120,46 @@ const user = {
           res.json({ message: "Datos correctos", dataRegisterUser: req.body });
         }
       }
- 
-       
-  
-/* 
+
+      /*
        */
- 
     }
   },
 
   login: async (req, res) => {
-    const { email, password } = req.body;
-    const existUser = await userModel.findOne({ email });
+    const { phone } = req.body;
+
+    console.log(phone);
+
+    const existUser = await userModel.findOne({ phone });
+
+/*     console.log(existUser.idUser); */
+
+    try {
+      if (existUser != null) {
+        payload = {
+          id: existUser.idUser,
+         
+          location: "madrid"
+        };
+ 
+
+        const token = jwt.sign(payload, process.env.SECRET ,{expiresIn: "15m"});
+
+        res.json({
+          message: "Login Correcto",
+          token,
+          status: true,
+        });
+      } else {
+        res.json({
+          message: "El número que has introducido es erróneo",
+          status: false,
+        });
+      }
+    } catch (error) {}
+
+    /*  const existUser = await userModel.findOne({ email });
     console.log(existUser);
     if (existUser) {
       if (existUser.password == password) {
@@ -147,7 +172,7 @@ const user = {
     } else {
       res.json("noRegister");
       console.log("No estás registrado en la bd");
-    }
+    } */
   },
   search: async (req, res) => {
     const { population } = req.body;
@@ -159,9 +184,21 @@ const user = {
     const users = await userModel.find();
     res.json(users);
   },
-  getOneUser: async (req, res) => {
+
+  dataUser: async (req, res) => {
+
+ console.log(req.userId)
+    const users = await userModel.find({idUser: req.userId});
+    res.json(
+      {data: users,
+        auth:true
+      }
+    );
+
+   getOneUser: async (req, res) => {
     const user = await userModel.findOne();
     res.json(user);
+
   },
   saveActivity: (req, res) => {
     /*  let ob1 = {
