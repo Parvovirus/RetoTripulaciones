@@ -6,6 +6,20 @@ const activitiesModel = require("../models/activity.model");
 const user = {
   registro: async (req, res) => {
     const { code, name, tlf, birth } = req.body;
+
+    const insertUser = new userModel({
+      name,
+      lastName,
+      birth,
+      tlf,
+      population,
+      photo,
+      idCoHouse,
+      role: 0,
+    });
+
+    insertUser.save();
+
     console.log(req.body);
 
     // ! Expresiones Regulares validaciones:
@@ -73,6 +87,50 @@ const user = {
       }
     }
   },
+  checkData: async (req, res) => {
+    const { idCoHousing, nameUser, tlfUser, dateUser } = req.body;
+
+    let splitDate = dateUser.split("/");
+
+    const checkCoHousing = await colivingModel.find({
+      idColiving: idCoHousing,
+    });
+
+    const checkNameUser = await userModel.find({ name: nameUser });
+
+    const checkDate = splitDate[3] > 1972 ? false : true;
+/* 
+    const checkExistUser = await userModel.find({phone: checkNameUser.phone}) */
+ 
+   
+    if (checkCoHousing=="") {
+      res.json({ message: "No existe el co housing" });
+      console.log("no existe")
+    } else if (!checkNameUser) {
+      res.json({ message: "No existe el usuario" });
+    } else if (checkDate != true) {
+      res.json({ message: "Fecha de usuario no válida" });
+    } else {
+
+      if (checkCoHousing != "") {
+        const checkTlf = checkCoHousing[0].guiatlf.includes(tlfUser);
+
+       
+
+        if (checkTlf != true) {
+          res.json({ message: "Número de teléfono no válido" });
+        } else {
+          res.json({ message: "Datos correctos", dataRegisterUser: req.body });
+        }
+      }
+ 
+       
+  
+/* 
+       */
+ 
+    }
+  },
 
   login: async (req, res) => {
     const { email, password } = req.body;
@@ -102,7 +160,7 @@ const user = {
     res.json(users);
   },
   saveActivity: (req, res) => {
-   /*  let ob1 = {
+    /*  let ob1 = {
       name: "Yoga",
       id_Category: 1,
       description: "Hacer yoga y estirar el cuerpo",
@@ -127,36 +185,35 @@ const user = {
       banner: "https://orpea.es/wp-content/uploads/2019/06/foto-yoga.jpg",
     }; */
     let ob2 = {
-        name: "Bailes de salón",
-        id_Category: 1,
-        description: "Aprender diferentes estilos de baile de salón",
-        sessions: [
-          {
-            numberSession: 1,
-            members: [1, 2],
-            date: "20-03-2022",
-          },
-          {
-            numberSession: 2,
-            members: [3, 4],
-            date: "21-03-2022",
-          },
-          {
-            numberSession: 3,
-            members: [9, 8],
-            date: "22-03-2022",
-          },
-        ],
-  
-        banner: "https://tumayoramigo.com/wp-content/uploads/2019/02/baile.jpg",
-      };
+      name: "Bailes de salón",
+      id_Category: 1,
+      description: "Aprender diferentes estilos de baile de salón",
+      sessions: [
+        {
+          numberSession: 1,
+          members: [1, 2],
+          date: "20-03-2022",
+        },
+        {
+          numberSession: 2,
+          members: [3, 4],
+          date: "21-03-2022",
+        },
+        {
+          numberSession: 3,
+          members: [9, 8],
+          date: "22-03-2022",
+        },
+      ],
 
-    var saveActivity = new activitiesModel( ob2);
+      banner: "https://tumayoramigo.com/wp-content/uploads/2019/02/baile.jpg",
+    };
 
-    saveActivity.save()
+    var saveActivity = new activitiesModel(ob2);
 
- 
-   /*  activitiesModel.save(ob1); */
+    saveActivity.save();
+
+    /*  activitiesModel.save(ob1); */
   },
 };
 
