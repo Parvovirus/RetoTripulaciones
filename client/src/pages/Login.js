@@ -33,7 +33,7 @@ function Login() {
       const { token, message, status } = res.data;
       alert(message);
 
-      if (status == true) {
+      if (status) {
         cookies.set("token", token);
       }
     });

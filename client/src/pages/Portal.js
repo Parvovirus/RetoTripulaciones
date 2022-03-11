@@ -17,15 +17,10 @@ const Portal = () => {
   const [allActivities, setAllActivities] = useState("")
   const [selectByCategory, setSelectByCategory] = useState(1);
 
-
-
- 
-
   const [user] = useAxiosAuth("datauser");
 
   useEffect(() => {
     if (user != "") {
-      console.log(user.data.auth);
 
       if (user.data.auth) {
        
@@ -34,11 +29,6 @@ const Portal = () => {
       }
     }
   }, [user]);
-
-
-
-
-
 
 
   useEffect(() => {
@@ -56,8 +46,6 @@ const Portal = () => {
     })
   }
 
-
-  console.log(allActivities)
   return (
     <div className='Portal'>
       <Search />
