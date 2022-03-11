@@ -5,11 +5,7 @@ const Home = () => {
   return (
     <div className='Home'>
 
- 
- 
-
-
-      <button><Link to={"/login"} > Iniciar sesión</Link></button>
+       <button><Link to={"/login"} > Iniciar sesión</Link></button>
       <button><Link to={"/register"} >Registrar</Link></button>
 
     </div>
