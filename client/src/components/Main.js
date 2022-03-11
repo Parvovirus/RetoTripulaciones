@@ -5,8 +5,8 @@ import Login from "../pages/Login"
 import Register from "../pages/Register"
 import Portal from "../pages/Portal"
 import Activities from "../pages/Activities"
-import FaceId from './FaceId'
-import VerificationCode from "./VerificationCode"
+import Planes from "../pages/Planes"
+
 
 
 
@@ -21,9 +21,8 @@ const Main = () => {
         <Route path='/register' element={<Register />} />
         <Route path='/portal' element={<Portal />} />
         <Route path='/act1/:idact' element={<Activities />} />
+        <Route path='/planes/:iduser' element={<Planes />} />
             
-
-
       </Routes>
 
 

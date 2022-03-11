@@ -159,6 +159,10 @@ const user = {
     const users = await userModel.find();
     res.json(users);
   },
+  getOneUser: async (req, res) => {
+    const user = await userModel.findOne();
+    res.json(user);
+  },
   saveActivity: (req, res) => {
     /*  let ob1 = {
       name: "Yoga",

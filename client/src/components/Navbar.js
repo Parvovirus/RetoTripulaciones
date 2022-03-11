@@ -4,12 +4,14 @@ import "./css/Navbar.scss";
 
 const Navbar = () => {
 
+    
     return (
         <div className="Navbar">
             <ul>
-                <li><Link to={"/Act"} >Mis actividades</Link></li>
+                <li><Link to={"/portal"} >Mis actividades</Link></li>
                 <li>|</li>
-                <li> <Link to={"/misplanes"} >Mis planes</Link></li>
+{/* Recogere el parametro para recoger la info de ese usuario: pillar por tokens */}
+                <li> <Link to={"/planes/1"} >Mis planes</Link></li>
                 <li>|</li>
                 <li><Link to={"/perfil"} >Perfil</Link></li>
 
