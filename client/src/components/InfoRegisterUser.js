@@ -1,56 +1,67 @@
-import axios from "axios"
+import axios from "axios";
 import React, { useState } from "react";
-
+import "./css/InfoRegisterUser.scss";
 function InfoRegisterUser(props) {
+  const [idCoHousing, setidCoHousing] = useState("");
+  const [nameUser, setNameUser] = useState("");
+  const [tlfUser, setTlfUser] = useState("");
+  const [dateUser, setDateUser] = useState("");
 
-    const [code, setCode] = useState("");
-    const [name, setName] = useState("");
-    const [tlf, setTlf] = useState("");
-    const [birth, setBirth] = useState("");
+  // const[registerData,setRegisterData] = useState([]);
 
-    // const[registerData,setRegisterData] = useState([]);
+  const test = () => {
+    console.log(props.hidden);
+    let filtro = {
+      idCoHousing,
+      nameUser,
+      tlfUser,
+      dateUser,
+    };
 
-
-    const test = () => {
-        console.log(props.hidden)
-        let filtro = {
-            code,
-            name,
-            tlf,
-            birth
+    if (!idCoHousing | !nameUser | !tlfUser | !dateUser) {
+      alert("revisa los campos");
+    } else {
+      axios.post("checkdata", filtro).then((res) => {
+        alert(res.data.message);
+        if (res.data.dataRegisterUser) {
+          props.saveDataUser(res.data.dataRegisterUser);
+          props.hidden(false);
+          props.show(true);
         }
-        // props.hidden(false);
-
-
-        axios.post("register", filtro).then((res) => {
-
-            if (res.data.auth) {
-                props.hidden(false);
-                props.show(true);
-
-            }else{
-                alert("datos incorrectos")
-            }
-        });
-
+      });
     }
+  };
 
-
-    return (
-        <div className="App">
-            <div>
-                <div>
-                    <input type="text" placeholder="Codigo Coliving" onChange={(e) => setCode(e.target.value)} />
-                    <input type="text" placeholder="Nombre" onChange={(e) => setName(e.target.value)} />
-                    <input type="text" placeholder="Teléfono" onChange={(e) => setTlf(e.target.value)} />
-                    <input type="text" placeholder="Fecha de Nacimiento" onChange={(e) => setBirth(e.target.value)} />
-                    <button onClick={test}>Siguiente</button>
-                </div>
-            </div>
-
-        </div>
-    );
-
+  return (
+    <div className="InfoRegisterUser">
+     
+ 
+      <input
+        type="number"
+        placeholder="Codigo Coliving"
+        className="inputs-color"
+        onChange={(e) => setidCoHousing(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Nombre"
+        onChange={(e) => setNameUser(e.target.value)}
+      />
+      <input
+        type="number"
+        placeholder="Teléfono"
+        onChange={(e) => setTlfUser(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Fecha de Nacimiento"
+        onChange={(e) => setDateUser(e.target.value)}
+      />
+      <button onClick={test}>Siguiente</button>
+     
+     
+    </div>
+  );
 }
 
 export default InfoRegisterUser;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import animationFaceId from "../img/faceid.gif"
+import "./css/Faceid.scss"
 
 const FaceId = () => {
 
@@ -13,9 +14,10 @@ const FaceId = () => {
   }, []);
 
   return (
-    <div>
+    <div className="Faceid">
 
-      <p>SCAN FACE</p>
+<img src={animationFaceId}></img>
+   
 
     </div>
   )

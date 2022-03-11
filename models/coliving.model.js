@@ -5,10 +5,12 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 const objetoUserSchema = {
     code: String,
     name: String,
-    activity: [Number],
+    activity: Array,
     place: String,
     price: Number,
-    banner: String
+    avatar: String,
+    guiatlf: Array,
+ 
 };
 
 const userSchema = mongoose.Schema(objetoUserSchema, { versionKey: false })

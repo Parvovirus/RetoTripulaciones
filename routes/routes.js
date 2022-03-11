@@ -4,6 +4,7 @@ const category = require("../controllers/category.controllers")
 const activities =require("../controllers/activities.controllers")
 
 router.post("/register", user.registro);
+router.post("/checkdata", user.checkData);
 router.post("/login", user.login);
 router.post("/search", user.search);
 router.get("/getusers", user.getUsers);
