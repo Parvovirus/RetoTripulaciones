@@ -10,7 +10,10 @@ router.post("/checkdata", user.checkData);
 router.post("/login", user.login);
 router.post("/search", user.search);
 router.get("/getusers", user.getUsers);
+
 router.get("/datauser", verifytoken, user.dataUser);
+router.post("/getoneuser", user.getOneUser);
+
 
 router.get("/saveactivity", user.saveActivity);
 router.get("/getcategory", category.getCategories);

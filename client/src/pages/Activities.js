@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import act1Banner from "../img/act1.jpg";
 import profesorAvatar from "../img/profesor.jpg";
 import "./css/Activity1.scss";
 import axios from "axios";
@@ -60,16 +59,7 @@ const Activities = () => {
 
   //! Se pasan los filtros de los usuarios por la session que se han apuntado
   const paintUsers = () => {
-    // dataActivity ? console.log(dataActivity.sessions) : ("")
-
-
-    if (dataActivity) {
-      let sessionLength = dataActivity.sessions.length;
-      console.log(sessionLength);
-
-
-
-    }
+       
     if (session == 1) {
 
 

@@ -12,10 +12,12 @@ import useAxiosAuth from "../hooks/useAxiosAuth";
 
 const Portal = () => {
 
-  const navigate = useNavigate();
 
-  // [idNameActivities] = [[id, nombre],[]]
-  const [idNameActivities, setIdActivity] = useState("")
+  const navigate = useNavigate();
+  const [allActivities, setAllActivities] = useState("")
+  const [selectByCategory, setSelectByCategory] = useState(1);
+
+
 
  
 
@@ -48,18 +50,14 @@ const Portal = () => {
 
     axios.get("getactivities").then((res) => {
       let cleanActivity = res.data;
-    
-      let idNameActivity = [];
 
-      for (let i = 0; i < cleanActivity.length; i++) {
-        idNameActivity.push([cleanActivity[i].idActivity , cleanActivity[i].name, cleanActivity[i].banner ]);
-      }
+      setAllActivities(cleanActivity);
 
-      setIdActivity(idNameActivity);
-    
     })
   }
 
+
+  console.log(allActivities)
   return (
     <div className='Portal'>
       <Search />
@@ -68,10 +66,9 @@ const Portal = () => {
 
       <p>Actividades</p>
 
+      {allActivities ? allActivities.map((act, i) => <Link key={i} to={`/act1/${act.idActivity}`}> <img className='Activity act1' src={act.banner}></img></Link>) : ""}
 
-      {idNameActivities ? idNameActivities.map((act, i) => <Link key={i} to={`/act1/${act[0]}`}> <img className='Activity act1' src={act[2]}></img></Link>) : ""}
-
-      <Navbar/>
+      <Navbar />
 
     </div>
   )
