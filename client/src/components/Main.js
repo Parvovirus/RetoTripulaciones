@@ -4,12 +4,11 @@ import Home from "../pages/Home"
 import Login from "../pages/Login"
 import Register from "../pages/Register"
 import Portal from "../pages/Portal"
-import Act1 from "../pages/Activity1"
-import Act2 from "../pages/Activity2"
-import Act3 from "../pages/Activity3"
+import Activities from "../pages/Activities"
 import FaceId from './FaceId'
 import VerificationCode from "./VerificationCode"
- 
+
+
 
 const Main = () => {
   return (
@@ -21,14 +20,8 @@ const Main = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/portal' element={<Portal />} />
-
-        <Route path='/act1' element={<Act1 />} />
-        <Route path='/act2' element={<Act2 />} />
-        <Route path='/act3' element={<Act3 />} />
-
-        <Route path='/faceid' element={<FaceId/>} />
-        <Route path='/random' element={<VerificationCode/>} />
-   
+        <Route path='/act1/:idact' element={<Activities />} />
+            
 
 
       </Routes>
