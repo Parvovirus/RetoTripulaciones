@@ -1,0 +1,16 @@
+.cont-barra {
+    margin-top  : 64%;
+    display        : flex;
+    justify-content: center;
+    align-content: flex-end;
+
+    >.blackposition {
+
+
+        width        : 33%;
+        height       : 5px;
+        left         : calc(50% - 134px/2);
+        background   : #000000;
+        border-radius: 100px;
+    }
+}

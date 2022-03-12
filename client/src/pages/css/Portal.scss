@@ -1,27 +1,55 @@
-.Portal{
+.Activity {
 
-
-
-   
-}
-.Activity{
-
-  
-    padding: 5%;
-    width: 80%;
+    padding    : 5%;
+    width      : 80%;
     margin-left: 5%;
-    margin: 5%;
+    margin     : 5%;
 }
 
-.act1{
+.act1 {
 
     background-color: rgb(255, 94, 0);
 }
-.act2{
 
-    background-color: rgb(157, 255, 0);
+.perfilname {
+
+    margin-left: 5%;
+    margin-top : 5%;
+
+    >img {
+        margin-right : 2%;
+        width        : 56px;
+        height       : 56px;
+        border-radius: 50%;
+    }
+
+    color      : #004747;
+    font-family: 'Poppins';
+    font-style : normal;
+    font-weight: 400;
+    font-size  : 22px;
+    line-height: 36px;
+
+    .namebold {
+        font-weight: 700;
+        font-size  : 24px;
+    }
 }
-.act3{
 
-    background-color: rgb(0, 255, 149);
+.categoryBanner {
+    display        : flex;
+    justify-content: space-evenly;
+
+    >img {
+        width : 72px;
+        height: 120px;
+        
+    }
+
+    >button {
+        border: 50 solid color #004747;
+
+    }
+
+
 }

@@ -1,10 +1,11 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import './css/Categorias.scss';
+import Filter from './Search';
+const CategoryBanner = ({setFilter}) => {
 
-const CategoryBanner = () => {
 
-  
-  const [nameCategory, setNameCategory] = useState("")
+  const [categories, setCategory] = useState("")
 
 
   useEffect(() => {
@@ -17,25 +18,22 @@ const CategoryBanner = () => {
 
     axios.get("getcategory").then((res) => {
       let cleanCategories = res.data;
-     
-
-      let nameCategoryArray = [];
-
-      for (let i = 0; i < cleanCategories.length; i++) {
-        nameCategoryArray.push(cleanCategories[i].name)
-      }
-      setNameCategory(nameCategoryArray);
+      setCategory(cleanCategories);
 
 
     })
- 
+
   }
+
 
 
   return (
     <div>
-      <h2>CATEGORIAS</h2>
-      {nameCategory ? nameCategory.map((cat, i) => <button key={i}>{cat}</button>) : ""}
+      <h2>Categorías</h2>
+      <div className='categoryBanner'>
+        {categories ? categories.map((cat, i) => <img key={i} src={cat.avatar} onClick={()=>setFilter(cat.idCategories)}></img>) : ""}
+
+      </div>
 
     </div>
   )

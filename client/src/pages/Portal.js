@@ -17,13 +17,17 @@ const Portal = () => {
   const [allActivities, setAllActivities] = useState("")
   const [selectByCategory, setSelectByCategory] = useState(1);
 
+  const [filterCategory, setFilterCategory] = useState()
+
+
+
   const [user] = useAxiosAuth("datauser");
 
   useEffect(() => {
     if (user != "") {
 
       if (user.data.auth) {
-       
+
       } else {
         navigate("/");
       }
@@ -40,25 +44,39 @@ const Portal = () => {
 
     axios.get("getactivities").then((res) => {
       let cleanActivity = res.data;
-
       setAllActivities(cleanActivity);
-
     })
   }
 
   return (
     <div className='Portal'>
-      <Search />
-      <CategoryBanner />
+      <div className='perfilname'>
+        {user ? <img src={user.data.data[0].avatar}></img> : ""}
+        {user ? <span> Hola, <span className="namebold">{user.data.data[0].name}</span></span> : ""}
+      </div>
+      <CategoryBanner setFilter={setFilterCategory} />
+      {/* <Search /> */}
       <Recommended />
 
       <p>Actividades</p>
 
-      {allActivities ? allActivities.map((act, i) => <Link key={i} to={`/act1/${act.idActivity}`}> <img className='Activity act1' src={act.banner}></img></Link>) : ""}
+      {filterCategory | allActivities ?
+
+        allActivities.filter((alt) => alt.id_Category == filterCategory)
+          .map((act, i) =>
+            <Link key={i} to={`/act1/${act.idActivity}`}> <img className='Activity act1' src={act.banner}></img></Link>
+          )
+        :
+        allActivities.map((act, i) =>
+          <Link key={i} to={`/act1/${act.idActivity}`}> <img className='Activity act1' src={act.banner}></img></Link>
+        )}
+   
+
+
 
       <Navbar />
 
-    </div>
+    </div >
   )
 }
 

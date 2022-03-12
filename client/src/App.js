@@ -1,18 +1,19 @@
-
-import axios from "axios"
 import React, { useState } from "react";
 import { BrowserRouter } from 'react-router-dom';
- 
- import Main from './components/Main';
+import Bateria from "./components/Bateria";
+import Main from './components/Main';
+import Barra from "./components/Barra";
 
- import './App.scss';
+import './App.scss';
 function App() {
 
   return (
     <div className="App">
-<BrowserRouter>
-   <Main/>
-   </BrowserRouter>
+      <BrowserRouter>
+        <Bateria />
+        <Main />
+        <Barra />
+      </BrowserRouter>
     </div>
   );
 

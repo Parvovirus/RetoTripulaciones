@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import animationFaceId from "../img/faceid.gif"
+import Buttonb from "./icons/Buttonb.png"
+
+
 import "./css/Faceid.scss"
 
 const FaceId = () => {
@@ -10,14 +13,16 @@ const FaceId = () => {
   useEffect(() => {
     setTimeout(() => {
       navigate("/")
-    }, 10000);
+    }, 5000);
   }, []);
 
   return (
     <div className="Faceid">
 
-<img src={animationFaceId}></img>
-   
+      <Link to={"/"}> <img className="buttonBack" src={Buttonb} ></img></Link>
+      <img src={animationFaceId}></img>
+      <p>Reconocimiento Facial</p>
+
 
     </div>
   )
