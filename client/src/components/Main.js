@@ -6,13 +6,13 @@ import Register from "../pages/Register"
 import Portal from "../pages/Portal"
 import Activities from "../pages/Activities"
 import Planes from "../pages/Planes"
-
+import "./css/Main.scss"
 
 
 
 const Main = () => {
   return (
-    <div>
+    <div className='Main'>
 
       <Routes>
 
@@ -21,7 +21,7 @@ const Main = () => {
         <Route path='/register' element={<Register />} />
         <Route path='/portal' element={<Portal />} />
         <Route path='/act1/:idact' element={<Activities />} />
-        <Route path='/planes/:iduser' element={<Planes />} />
+        <Route path='/planes' element={<Planes />} />
             
       </Routes>
 

@@ -6,27 +6,30 @@ const cookies = new Cookies();
 const UseAxiosAuth = (props) => {
 
   const [res, setRes] = useState("");
-  
+
   useEffect(() => {
     postBackend(props)
-     
+
   }, []);
 
 
   const postBackend = async (props) => {
 
-     
+    //Recoge el token de las cookies
     let token = cookies.get("token")
-     const dataRes = await axios.get(`${props}`,{
+
+    //Busca el endpoint de Routes con el props que se metio
+    //
+    const dataRes = await axios.get(`${props}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-  
-    setRes(dataRes); 
+
+    setRes(dataRes);
   };
 
- 
 
-  return  [res];
+
+  return [res];
 };
 
 export default UseAxiosAuth;

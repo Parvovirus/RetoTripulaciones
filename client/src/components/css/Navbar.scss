@@ -1,18 +1,28 @@
 .Navbar {
-    border-top: 1px solid grey;
-
+    position: fixed;
+    bottom: 2%;
+    background-color: white;
+    width: 105%;
+    padding-top: 5%;
+    margin-left: -5%;
 
     >ul {
-        width          : 80%;
+        width          : 100%;
         display        : flex;
-        justify-content: space-between;
+        justify-content: space-around;
         list-style     : none;
-        margin-left    : -2%;
-        padding-bottom : 5%;
 
-        // >li {
-        //     border-right: 1px solid grey;
-        //     padding-right: 5%;
-        // }
+        >li {
+            display       : flex;
+            flex-direction: column;
+
+            >img {
+                margin: auto;
+            }
+        }
+    }
+
+    >.icons {
+        margin-left: 3px;
     }
 }
