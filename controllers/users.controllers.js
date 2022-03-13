@@ -194,106 +194,13 @@ const user = {
         auth:true
       }
     );
-
+    },
    getOneUser: async (req, res) => {
     const user = await userModel.findOne();
     res.json(user);
 
-  },
-  saveActivity: (req, res) => {
-    /*  let ob1 = {
-      name: "Yoga",
-      id_Category: 1,
-      description: "Hacer yoga y estirar el cuerpo",
-      sessions: [
-        {
-          numberSession: 1,
-          members: [1, 2],
-          date: "20-03-2022",
-        },
-        {
-          numberSession: 2,
-          members: [3, 4],
-          date: "21-03-2022",
-        },
-        {
-          numberSession: 3,
-          members: [9, 8],
-          date: "22-03-2022",
-        },
-      ],
-
-      banner: "https://orpea.es/wp-content/uploads/2019/06/foto-yoga.jpg",
-    }; */
-    let ob2 = {
-      name: "Bailes de salón",
-      id_Category: 1,
-      description: "Aprender diferentes estilos de baile de salón",
-      sessions: [
-        {
-          numberSession: 1,
-          members: [1, 2],
-          date: "20-03-2022",
-        },
-        {
-          numberSession: 2,
-          members: [3, 4],
-          date: "21-03-2022",
-        },
-        {
-          numberSession: 3,
-          members: [9, 8],
-          date: "22-03-2022",
-        },
-      ],
-
-      banner: "https://tumayoramigo.com/wp-content/uploads/2019/02/baile.jpg",
-    };
-
-    var saveActivity = new activitiesModel(ob2);
-
-    saveActivity.save();
-
-    /*  activitiesModel.save(ob1); */
-  },
-};
-
-/**
- * Valida que el dni introducido por el usuario es real, utilizando el algoritmo de la policía
- * @param {string} dni - La informacion que recibe del formulario de registro
- * @return {string} letra - Devuelve la letra que correspondería según el algoritmo policial al número de dni introducido para comprobar si es correcto.
- */
-
-function validationFormat(dni) {
-  dni = dni.toUpperCase();
-  var letras = "TRWAGMYFPDXBNJZSQVHLCKE";
-  var nums = parseInt(dni.substring(0, dni.length - 1));
-  var letra = letras[nums % letras.length]; // [nums % letras.length] = posicion de la letra del array de la policia
-  return letra == dni[8];
-}
-/**
- * Deja el dni con el formato que necesitamos para nuestra base de datos
- * @param {string} dni - La informacion que recibe del formulario de registro
- * @return {string} conGuion - Devuelve el dni que nos ha introducido el usuario sin el guion, si lo tuviera, para que tenga el formato que necesitamos.
- */
-
-function quitarGuion(dni) {
-  var conGuion = dni.split("-");
-  if (conGuion.length == 1) {
-    return dni;
-  } else {
-    return conGuion[0] + conGuion[1];
   }
 }
-/**
- * Recoge el dni sin guion que hemos generado en la funciónm quitar guion y da ese valor a la variable dni que utilizaremos para el registro.
- * @param {string} dni - La informacion que recibe del dni sin guion de la función quitar guion
- * @return {string} dhi - Devuelve la variable dni con el nuevo valor asignado
- */
+ 
 
-function validation_dni(dni) {
-  dni = quitarGuion(dni);
-  return validationFormat(dni);
-}
-
-module.exports = user; //revisar el nombre para importarlo en las rutas
+ module.exports = user; //revisar el nombre para importarlo en las rutas
