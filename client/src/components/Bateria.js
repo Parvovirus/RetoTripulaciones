@@ -4,7 +4,7 @@ const Bateria = () => {
 
   
   return (
-    <div className="a">
+    <div className="ligth">
         <img src={cabecera}></img>
        
     </div>

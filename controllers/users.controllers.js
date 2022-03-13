@@ -89,7 +89,7 @@ const user = {
 
     const checkNameUser = await userModel.find({ name: nameUser });
 
-    const checkDate = splitDate[3] > 1972 ? false : true;
+    const checkDate = splitDate[3] > 1967 ? false : true;
     /* 
     const checkExistUser = await userModel.find({phone: checkNameUser.phone}) */
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter } from 'react-router-dom';
 import Bateria from "./components/Bateria";
 import Main from './components/Main';

@@ -1,21 +1,9 @@
-.Activity {
-
-    padding    : 5%;
-    width      : 80%;
-    margin-left: 5%;
-    margin     : 5%;
-}
-
-.act1 {
-
-    background-color: rgb(255, 94, 0);
-}
-
 .perfilname {
 
     margin-left: 5%;
     margin-top : 5%;
 
+    // Avatar del usuario
     >img {
         margin-right : 2%;
         width        : 56px;
@@ -23,33 +11,73 @@
         border-radius: 50%;
     }
 
-    color      : #004747;
-    font-family: 'Poppins';
-    font-style : normal;
-    font-weight: 400;
-    font-size  : 22px;
-    line-height: 36px;
+    // Parrafo de bienvenida
+    >span {
+        color      : #004747;
+        font-family: 'Poppins';
+        font-style : normal;
+        font-weight: 400;
+        font-size  : 22px;
+        line-height: 36px;
+    }
 
+    // Nombre del usuario
     .namebold {
         font-weight: 700;
         font-size  : 24px;
     }
+
+
+
+}
+
+.navbar-top-fixed {
+    position        : sticky;
+    top             : 5%;
+    padding-top     : 2%;
+    padding-bottom  : 1%;
+    background-color: white;
+    border-bottom   : 2px solid rgb(214, 214, 214);
+
+}
+
+.title-cat {
+    margin-top : 13%;
+    margin-left: 5%;
+    font-family: 'Poppins';
+    font-style : normal;
+    font-weight: 700;
+    font-size  : 32px;
+    line-height: 36px;
 }
 
 .categoryBanner {
     display        : flex;
+    flex-wrap      : wrap;
     justify-content: space-evenly;
-
-    >img {
-        width : 72px;
-        height: 120px;
-        
-    }
 
     >button {
         border: 50 solid color #004747;
 
     }
 
+    // >img {
+    //     filter: grayscale(0);
+    // }
 
+    // >img:focus {
+    //     filter: grayscale(1);
+    // }
+}
+
+
+.cont-actividades {
+    display       : flex;
+    flex-direction: column;
+    margin-left   : 5%;
+    margin-bottom : 25%;
+
+    >a {
+        margin-bottom: 1%;
+    }
 }

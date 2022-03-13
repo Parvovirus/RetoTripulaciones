@@ -32,7 +32,10 @@ const VerificationCode = (props) => {
   return (
     <div >
 
-      <Link to={"/"}> <img className="buttonBack" src={Buttonb} ></img></Link>
+      <img className="buttonBack" src={Buttonb} onClick={() => {
+        props.back(true);
+        props.hidden(false);
+      }}></img>
 
       <h2 className="titleCreate">Crear una cuenta</h2>
 

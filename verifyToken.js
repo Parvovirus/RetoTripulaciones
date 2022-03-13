@@ -8,7 +8,6 @@ const verifytoken = (req, res, next) => {
 
     res.json({status: false})
  
-
   } else {
 
     const bearerToken = token.split(" ")[1];  
