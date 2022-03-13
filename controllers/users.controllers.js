@@ -24,10 +24,10 @@ const user = {
     console.log(req.body);
 
     // ! Expresiones Regulares validaciones:
-    // var regExpCode = new RegExp(/\w{10}/);
+    // var regExpCode = new RegExp(/\w{9}/);
     // var regExpName = new RegExp(/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]+$/u);
-    // var regExpBirth = new RegExp(/^(?:3[01]|[12][0-9]|0?[1-9])([\-/.])(0?[1-9]|1[1-2])\1\d{4}$/);
     // var regExpTlf = new RegExp(/+34|0034|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}/);
+    // var regExpBirth = new RegExp(/^(?:3[01]|[12][0-9]|0?[1-9])([\-/.])(0?[1-9]|1[1-2])\1\d{4}$/);
 
     //! Zona de validaciones
 
@@ -40,17 +40,7 @@ const user = {
     // var ok = codeOk && nameOk && birthOk && tlfOk;
     var ok = true;
     if (ok) {
-      // const insertColiving = new colivingModel({
-      //     code: "2",
-      //     name: "Las Palomas",
-      //     activity: [],
-      //     place: "Las Palomas",
-      //     price: "700",
-      //     img: "http://www.ayto-fuenlabrada.es/recursos/img/TA/prehome/49677_2362362009102135.jpg"
-      // })
-
-      // insertColiving.save();
-
+      
       const existColiving = await colivingModel.findOne({ code });
       if (existColiving) {
         const existUser = await userModel.findOne({ tlf });
@@ -99,7 +89,7 @@ const user = {
 
     const checkNameUser = await userModel.find({ name: nameUser });
 
-    const checkDate = splitDate[3] > 1972 ? false : true;
+    const checkDate = splitDate[3] > 1967 ? false : true;
     /* 
     const checkExistUser = await userModel.find({phone: checkNameUser.phone}) */
 
@@ -127,17 +117,14 @@ const user = {
   login: async (req, res) => {
     const { phone } = req.body;
 
-
     const existUser = await userModel.findOne({ phone });
 
     try {
       if (existUser != null) {
         payload = {
           id: existUser.idUser,
-
           location: "madrid"
         };
-
 
         const token = jwt.sign(payload, process.env.SECRET);
 
@@ -154,11 +141,13 @@ const user = {
       }
     } catch (error) { }
   },
+
   search: async (req, res) => {
     const { population } = req.body;
     const existUser = await userModel.find({ population });
     res.json(existUser);
   },
+
   getUsers: async (req, res) => {
     console.log("llega");
     const users = await userModel.find();
@@ -182,4 +171,4 @@ const user = {
   },
 };
 
-module.exports = user; //revisar el nombre para importarlo en las rutas
+module.exports = user; 

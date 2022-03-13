@@ -1,6 +1,7 @@
 import axios from "axios"
 import React, { useState, useEffect } from "react";
-
+import Search from "./icons/Search.png";
+import "./css/Search.scss";
 
 function Filter() {
 
@@ -23,14 +24,17 @@ function Filter() {
     }
     return (
         <div className="App">
-            <input onChange={(e) => setSearchData(e.target.value)} />
-            
-            {resultsData != "" ? resultsData.map((result) => {
+            <div className="div-search">
+                <img className="icons isearch" src={Search}></img>
+                <input placeholder="Buscar Actividad" onChange={(e) => setSearchData(e.target.value)} />
+            </div>
+
+            {/* {resultsData != "" ? resultsData.map((result) => {
                 return (<div> 
                     <p>{result.name}</p>
                     <img src={result.photo}></img>
                     </div>)
-            }) : ""}
+            }) : ""} */}
 
         </div>
     );

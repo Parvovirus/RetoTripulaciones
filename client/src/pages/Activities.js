@@ -58,9 +58,7 @@ const Activities = () => {
 
   //! Se pasan los filtros de los usuarios por la session que se han apuntado
   const paintUsers = () => {
-       
     if (session == 1) {
-
 
       return users.filter((act) => { if (act.activities[0].session == session) { return act } }).map((user, i) => {
         return (<div key={i}>
@@ -70,10 +68,8 @@ const Activities = () => {
       })
 
 
-
-
     } else if (session == 2) {
-      return users.filter((act) => { if (act.activities[0].session == 2) { return act } }).map((user, i) => {
+      return users.filter((act) => { if (act.activities[0].session == session) { return act } }).map((user, i) => {
         return (<div key={i}>
           <p>{user.name}</p>
           <img src={user.avatar} />
@@ -82,29 +78,32 @@ const Activities = () => {
 
 
     } else if (session == 3) {
-      return users.filter((act) => { if (act.activities[0].session == 3) { return act } }).map((user, i) => {
+      return users.filter((act) => { if (act.activities[0].session == session) { return act } }).map((user, i) => {
         return (<div key={i}>
           <p>{user.name}</p>
           <img src={user.avatar} />
         </div>)
       })
 
-
     }
-
 
   }
 
-
+  // document.querySelector
 
   return (
     <div className="Activity1">
-      {/* Banner de lactividad */}
-      {dataActivity ? <img src={dataActivity.banner} alt="" /> : ""}
 
-      {/* Se pinta botones de las sessiones que hay */}
-      <div className="sessions-container">
-        {dataActivity ? dataActivity.sessions.map((act, i) => <button onClick={() => setSession(act.numberSession)} key={i}>Sesión {act.numberSession}</button>) : ("")}
+      {/* Banner de la actividad */}
+      {dataActivity ? <img src={require(`${dataActivity.banner}`)} alt="" /> : ""}
+      <div className="prox-sessiones">
+
+        <p>Próximas Sesiones</p>
+        {/* Se pinta botones de las sessiones que hay */}
+        <div className="sessions-container">
+          {dataActivity ? dataActivity.sessions.map((act, i) => <button onClick={() => setSession(act.numberSession)} key={i}>Sesión {act.numberSession}</button>) : ("")}
+        </div>
+
       </div>
 
       <div className="ProfessorInfo">
