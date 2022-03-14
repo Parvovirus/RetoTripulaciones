@@ -3,7 +3,7 @@
 const mongoose = require("mongoose");
 
 // url del mongo
-const url = "mongodb://localhost:27017/tripulaciones";
+const url = `mongodb+srv://cohouse:${process.env.passMongodb}@cluster0.ylggb.mongodb.net/tripulaciones`;
 
 mongoose.connect(url, {
     useNewUrlParser: true,

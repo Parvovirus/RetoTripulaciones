@@ -20,41 +20,41 @@ const UseAxiosAuth = (props) => {
 
     //Recoge el token de las cookies
     let token = cookies.get("token")
-     if(token){
+    if (token) {
 
       const dataRes = await axios.get(`${props}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-  
 
-      if(dataRes.data.auth==true){
 
-        setRes(dataRes);  
+      if (dataRes.data.auth == true) {
+
+        setRes(dataRes);
         setAuth(true)
-      }else{
+      } else {
 
         setAuth(false)
       }
 
- 
-    }else{
 
-      let data = {auth: false}
+    } else {
+
+      let data = { auth: false }
       setRes(data);
       setAuth(false)
-      
+
     }
 
     //Busca el endpoint de Routes con el props que se metio
     //
- 
+
   };
 
 
 
-  return [res,auth];
+  return [res, auth];
 
-   
+
 };
 
 export default UseAxiosAuth;
