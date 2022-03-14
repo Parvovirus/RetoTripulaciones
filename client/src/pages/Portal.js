@@ -11,13 +11,9 @@ import useAxiosAuth from "../hooks/useAxiosAuth";
 
 const Portal = () => {
 
-
   const navigate = useNavigate();
   const [allActivities, setAllActivities] = useState("")
   const [filterCategory, setFilterCategory] = useState("")
-
-
-
   const [user] = useAxiosAuth("datauser");
 
   useEffect(() => {
@@ -31,13 +27,11 @@ const Portal = () => {
     }
   }, [user]);
 
-
   useEffect(() => {
     bannerActivities();
   }, []);
 
   const bannerActivities = () => {
-
 
     axios.get("getactivities").then((res) => {
       let cleanActivity = res.data;
@@ -66,14 +60,13 @@ const Portal = () => {
           // Para pintar todas no tiene que haber filtro de categorías
           (!filterCategory ? allActivities.map((act, i) =>
             <Link key={i} to={`/act1/${act.idActivity}`}> <img className='Activity' src={require(`${allActivities[i].banner}`)}></img></Link>
-            // Si hay giltro solo pinta las actividades filtradas
+            // Si hay filtro solo pinta las actividades filtradas
           ) : allActivities.filter((alt) => alt.id_Category === filterCategory)
             .map((act, j) =>
               <Link key={j} to={`/act1/${act.idActivity}`}> <img className='Activity' src={require(`${act.banner}`)}></img></Link>
             ))
           : ""}
       </div>
-
 
       <Navbar />
 
