@@ -18,19 +18,21 @@ const Portal = () => {
 
 
 
-  const [user] = useAxiosAuth("datauser");
-
+  const [user ,auth] = useAxiosAuth("datauser");
+ 
+ 
+  
   useEffect(() => {
-    if (user != "") {
+    if(auth===true){
 
-      if (user.data.auth) {
+   navigate("/portal")
+   } else if(auth===false){
 
-      } else {
-        navigate("/");
-      }
-    }
-  }, [user]);
+    navigate("/")
+   }
 
+ }, [auth])
+  
 
   useEffect(() => {
     bannerActivities();
@@ -50,8 +52,8 @@ const Portal = () => {
     <div className='Portal'>
       <div className='navbar-top-fixed'>
         <div className='perfilname'>
-          {user ? <img src={user.data.data[0].avatar}></img> : ""}
-          {user ? <span> Hola, <span className="namebold">{user.data.data[0].name}</span></span> : ""}
+          {user && auth ? <img src={user.data.data[0].avatar}></img> : ""}
+          {user && auth  ? <span> Hola, <span className="namebold">{user.data.data[0].name}</span></span> : ""}
         </div>
         <Search />
       </div>

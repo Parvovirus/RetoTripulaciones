@@ -16,18 +16,18 @@ function Login() {
 
   const navigate = useNavigate();
 
-  const [user] = useAxiosAuth("datauser");
+  const [user ,auth] = useAxiosAuth("datauser");
+
+  
 
   useEffect(() => {
-    if (user != "") {
-      console.log(user.data.auth);
+     if(auth===true){
 
-      if (user.data.auth) {
-        navigate("/portal");
-      } else {
-      }
-    }
-  }, [user]);
+    navigate("/portal")
+    } 
+
+  }, [auth])
+  
 
   const checkLogin = () => {
     let filtro = {
@@ -38,8 +38,14 @@ function Login() {
       const { token, message, status } = res.data;
       alert(message);
 
+      
+
       if (status) {
         cookies.set("token", token);
+        window.location.reload()
+      }else if(status==false){
+        setPhone("")
+
       }
     });
   };
@@ -59,6 +65,7 @@ function Login() {
             type="text"
             placeholder="600 000 000"
             onChange={(e) => setPhone(e.target.value)}
+            value={phone}
           />
         </div>
 
