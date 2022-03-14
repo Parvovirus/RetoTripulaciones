@@ -23,7 +23,6 @@ const Activities = () => {
   const [session, setSession] = useState();
   const [dataActivity, setDataActivity] = useState();
 
-
   const getBannerAct = () => {
 
     axios.post("/getoneactivity", { idActivity: idact }).then((res) => {
@@ -113,7 +112,6 @@ const Activities = () => {
 
 
       <div className="participants">
-
         {paintUsers()}
       </div>
       <Navbar />
