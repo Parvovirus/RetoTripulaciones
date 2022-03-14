@@ -7,6 +7,7 @@ import Portal from "../pages/Portal"
 import Activities from "../pages/Activities"
 import Planes from "../pages/Planes"
 import "./css/Main.scss"
+import FaceId from './FaceId'
 
 
 
@@ -22,7 +23,8 @@ const Main = () => {
         <Route path='/portal' element={<Portal />} />
         <Route path='/act1/:idact' element={<Activities />} />
         <Route path='/planes' element={<Planes />} />
-            
+        <Route path='/faceid' element={<FaceId />} />
+
       </Routes>
 
 

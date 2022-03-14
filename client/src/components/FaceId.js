@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import animationFaceId from "../img/faceid.gif"
 import Buttonb from "./icons/Buttonb.png"
+import useAxiosAuth from "../hooks/useAxiosAuth";
 
 
 import "./css/Faceid.scss"
@@ -9,15 +10,24 @@ import "./css/Faceid.scss"
 const FaceId = () => {
 
   const navigate = useNavigate();
+  const [user, auth] = useAxiosAuth("datauser");
 
   useEffect(() => {
-    setTimeout(() => {
-      navigate("/")
-    }, 5000);
-  }, []);
+    if (auth === true) {
+      setTimeout(() => {
+        console.log("/portal")
+        navigate("/portal")
+      }, 5000);
 
 
-  
+    } else if (auth === false) {
+      setTimeout(() => {
+        navigate("/");
+        console.log("/home");
+      }, 5000)
+    }
+  }, [auth])
+
   return (
     <div className="Faceid">
 

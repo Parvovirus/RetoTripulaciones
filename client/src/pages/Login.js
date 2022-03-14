@@ -8,6 +8,7 @@ import Cookies from "universal-cookie";
 import Tlf from "../components/icons/Call.png";
 
 
+
 const cookies = new Cookies();
 
 function Login() {
@@ -41,7 +42,7 @@ function Login() {
 
       if (status) {
         cookies.set("token", token);
-        window.location.reload()
+        navigate("/faceid")
       }else if(status==false){
         setPhone("")
 
