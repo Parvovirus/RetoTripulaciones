@@ -23,7 +23,6 @@ const Activities = () => {
   const [session, setSession] = useState();
   const [dataActivity, setDataActivity] = useState();
 
-
   const getBannerAct = () => {
 
     axios.post("/getoneactivity", { idActivity: idact }).then((res) => {
@@ -98,10 +97,12 @@ const Activities = () => {
       {dataActivity ? <img src={require(`${dataActivity.banner}`)} alt="" /> : ""}
       <div className="prox-sessiones">
 
+
       
         {/* Se pinta botones de las sessiones que hay */}
         <div className="sessions-container">
           {dataActivity ? dataActivity.sessions.map((act, i) => <button className="buttons-sessions" onClick={() => setSession(act.numberSession)} key={i}>Sesión {act.numberSession}</button>) : ("")}
+
         </div>
 
       </div>
@@ -113,10 +114,7 @@ const Activities = () => {
 
 
       <div className="participants">
-
  <h2>Plazas Disponibles</h2> 
- 
-
  
       {paintUsers()} 
      

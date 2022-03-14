@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 const verifytoken = (req, res, next) => {
-  const token = req.headers["authorization"];
 
   if (!token) {
 
@@ -23,6 +22,7 @@ const verifytoken = (req, res, next) => {
     });
 
     // req.userId = 1
+
   }
 };
 

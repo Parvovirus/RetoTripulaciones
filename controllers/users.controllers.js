@@ -40,7 +40,7 @@ const user = {
     // var ok = codeOk && nameOk && birthOk && tlfOk;
     var ok = true;
     if (ok) {
-      
+
       const existColiving = await colivingModel.findOne({ code });
       if (existColiving) {
         const existUser = await userModel.findOne({ tlf });
@@ -83,6 +83,7 @@ const user = {
 
     let splitDate = dateUser.split("/");
 
+    //No meter llaves o procurar estar atentos.
     const checkCoHousing = await colivingModel.find({
       idColiving: idCoHousing,
     });

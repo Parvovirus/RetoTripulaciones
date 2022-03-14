@@ -38,7 +38,6 @@ function Login() {
       const { token, message, status } = res.data;
       alert(message);
 
-      
 
       if (status) {
         cookies.set("token", token);

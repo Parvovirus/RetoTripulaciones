@@ -29,3 +29,4 @@ const Bateria = () => {
 };
 
 export default Bateria;
+
