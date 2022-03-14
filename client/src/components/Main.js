@@ -6,13 +6,13 @@ import Register from "../pages/Register"
 import Portal from "../pages/Portal"
 import Activities from "../pages/Activities"
 import Planes from "../pages/Planes"
-
+import "./css/Main.scss"
 
 
 
 const Main = () => {
   return (
-    <div>
+    <div className='Main'>
 
       <Routes>
 
