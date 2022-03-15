@@ -7,7 +7,8 @@ const objetoUserSchema = {
     id_Category: Number,
     description: String,
     sessions: Array,
-    banner: String
+    banner: String,
+    
 };
 
 const userSchema = mongoose.Schema(objetoUserSchema, { versionKey: false })

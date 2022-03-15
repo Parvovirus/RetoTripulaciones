@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const objetoUserSchema = {
-    code: String,
+    code: Number,
     name: String,
     activity: Array,
     place: String,

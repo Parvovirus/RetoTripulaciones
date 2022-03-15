@@ -80,4 +80,4 @@ const Portal = () => {
   )
 }
 
-export default Portal
+export default Portal;

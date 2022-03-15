@@ -5,113 +5,60 @@ const activitiesModel = require("../models/activity.model");
 const jwt = require("jsonwebtoken");
 
 const user = {
-  registro: async (req, res) => {
-    const { code, name, tlf, birth } = req.body;
-
-    const insertUser = new userModel({
-      name,
-      lastName,
-      birth,
-      tlf,
-      population,
-      photo,
-      idCoHouse,
-      role: 0,
-    });
-
-    insertUser.save();
-
-    console.log(req.body);
-
-    // ! Expresiones Regulares validaciones:
-    // var regExpCode = new RegExp(/\w{9}/);
-    // var regExpName = new RegExp(/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]+$/u);
-    // var regExpTlf = new RegExp(/+34|0034|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}/);
-    // var regExpBirth = new RegExp(/^(?:3[01]|[12][0-9]|0?[1-9])([\-/.])(0?[1-9]|1[1-2])\1\d{4}$/);
-
-    //! Zona de validaciones
-
-    // const codeOk = regExpCode.test(codigo);
-    // const nameOk = regExpName.test(name);
-    // const birthOk = regExpBirth.test(birth);
-    // const tlfOk = regExpTlf.test(tlf);
-    // const tlfOk = true;
-
-    // var ok = codeOk && nameOk && birthOk && tlfOk;
-    var ok = true;
-    if (ok) {
-
-      const existColiving = await colivingModel.findOne({ code });
-      if (existColiving) {
-        const existUser = await userModel.findOne({ tlf });
-        console.log(existUser);
-        if (!existUser) {
-          const insertUser = new userModel({
-            name,
-            lastName,
-            birth,
-            tlf,
-            population,
-            photo,
-            idCoHouse,
-            role: 0,
-          });
-
-          insertUser.save();
-          res.json({ auth: true });
-        } else {
-          res.json({ auth: false });
-          console.log("Existe el usuario");
-        }
-      } else {
-        console.log("codigo Coliving no registrado");
-      }
-    } else {
-      if (!nameOk) {
-        res.json("incorrectFormatName");
-      } else if (!codigoOk) {
-        res.json("incorrectFormatCode");
-      } else if (!birthOk) {
-        res.json("incorrectFormatBirth");
-      } else if (!tlfOk) {
-        res.json("incorrectFormatTlf");
-      }
-    }
-  },
+  
   checkData: async (req, res) => {
+
     const { idCoHousing, nameUser, tlfUser, dateUser } = req.body;
 
-    let splitDate = dateUser.split("/");
-
-    //No meter llaves o procurar estar atentos.
-    const checkCoHousing = await colivingModel.find({
-      idColiving: idCoHousing,
+    const checkCoHousing = await colivingModel.findOne({
+      code: idCoHousing,
     });
 
-    const checkNameUser = await userModel.find({ name: nameUser });
-
-    const checkDate = splitDate[3] > 1967 ? false : true;
-    /* 
-    const checkExistUser = await userModel.find({phone: checkNameUser.phone}) */
-
-    if (checkCoHousing == "") {
+    if (!checkCoHousing) {
       res.json({ message: "No existe el co housing" });
 
-    } else if (!checkNameUser) {
-      res.json({ message: "No existe el usuario" });
-    } else if (checkDate != true) {
-      res.json({ message: "Fecha de usuario no válida" });
     } else {
-      if (checkCoHousing != "") {
-        const checkTlf = checkCoHousing[0].guiatlf.includes(tlfUser);
-
-        if (checkTlf != true) {
-          res.json({ message: "Número de teléfono no válido" });
-        } else {
-          res.json({ message: "Datos correctos", dataRegisterUser: req.body });
+      let existVeriCohUser = "";
+      for (let i = 0; i < checkCoHousing.guiatlf.length; i++) {
+        if (tlfUser == checkCoHousing.guiatlf[i]) {
+          i == checkCoHousing.guiatlf.length;
+          existVeriCohUser = tlfUser;
         }
       }
+      console.log(existVeriCohUser)
 
+      //Si está en la whiteList
+      if (existVeriCohUser) {
+        //  console.log("Cohouse tiene registrado tlf en su guia, puede registrarse el user")
+        const checkExistUser = await userModel.findOne({ phone: tlfUser });
+        console.log(checkExistUser)
+
+        if (checkExistUser) {
+          res.json({ message: "Ya estaba registrada " });
+        }
+        else {
+
+          const insertUser = new userModel({
+            name: nameUser,
+            age: dateUser,
+            address: "",
+            population: "",
+            avatar: "",
+            phone: tlfUser,
+            idCoHouse: idCoHousing,
+            role: 0,
+            date: "",
+            genere: "",
+            cp: "",
+            activities: []
+          });
+          insertUser.save();
+          res.json({ message: "Datos correctos", dataRegisterUser: req.body });
+        }
+
+      } else {
+        res.json({ message: "cohouse no te tiene registrado, contacte con un admin " });
+      }
     }
   },
 
@@ -119,7 +66,8 @@ const user = {
     const { phone } = req.body;
 
     const existUser = await userModel.findOne({ phone });
-
+    console.log("code")
+    console.log(existUser)
     try {
       if (existUser != null) {
         payload = {
