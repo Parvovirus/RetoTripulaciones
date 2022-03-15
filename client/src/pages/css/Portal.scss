@@ -34,15 +34,7 @@
 }
 
 .navbar-top-fixed {
-
-    top             : 15%;
-/*     position        : sticky;
-    top             : 5%;
-    padding-top     : 2%;
-    padding-bottom  : 1%;
-    background-color: white;
-    border-bottom   : 2px solid rgb(214, 214, 214); */
-
+    top    : 15%;
 }
 
 .title-cat {
@@ -54,6 +46,7 @@
     font-size  : 32px;
     line-height: 36px;
 }
+
 
 .categoryBanner {
     display        : flex;
@@ -73,7 +66,14 @@
     //     filter: grayscale(1);
     // }
 }
-
+.title-recomended{
+    margin-top: 5%;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 36px;
+}
 
 .cont-actividades {
     display       : flex;

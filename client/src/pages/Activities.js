@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import profesorAvatar from "../img/profesor.jpg";
+import profesorAvatar from "../img/profesor.png";
 import "./css/Activity1.scss";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -33,19 +33,19 @@ const Activities = () => {
         (dat) => dat.idActivity == idact
       );
 
-      if(demos){
+      if (demos) {
         if (demos[0].status == "process") {
           setSubscription(true);
-        }else if(demos[0].status !== "process"){
+        } else if (demos[0].status !== "process") {
 
           console.log("nada")
         }
-  
-      }else {
+
+      } else {
 
         console.log("vete a freir espaarggos")
       }
-      
+
       setIdUser(datauser.data.data[0].idUser);
     }
   }, [datauser]);
@@ -59,9 +59,9 @@ const Activities = () => {
   // console.log(session)
 
   //!Seleciona a los users que se han apuntado a la actividad
-   
-  const getUsers =  async () => {
-  await  axios.get("/getusers").then((res) => {
+
+  const getUsers = async () => {
+    await axios.get("/getusers").then((res) => {
       let cleanUsers = res.data;
       let idActivity = idact;
 
@@ -73,14 +73,14 @@ const Activities = () => {
 
 
       // [userss] -> filtrado por actividad elegida
-    /*   let userss = cleanUsers.filter((act) => {
-        if (act.activities[0].idActivity == `${idActivity}`) {
-          return act;
-        }
-      }); */
+      /*   let userss = cleanUsers.filter((act) => {
+          if (act.activities[0].idActivity == `${idActivity}`) {
+            return act;
+          }
+        }); */
 
-      
-      let userss = cleanUsers.filter((act) => act.activities[0].idActivity == `${idActivity}` );
+
+      let userss = cleanUsers.filter((act) => act.activities[0].idActivity == `${idActivity}`);
 
       setUsers(userss);
     });
@@ -197,26 +197,52 @@ const Activities = () => {
         ""
       )}
       <div className="prox-sessiones">
-
         {/* Se pinta botones de las sessiones que hay */}
+
+        {dataActivity ? <p className="titles-sesiones nameAct">{dataActivity.name} </p> : ""}
+        <p className="titles-sesiones">Próximas Sesiones</p>
         <div className="sessions-container">
           {dataActivity
-            ? dataActivity.sessions.map((act, i) => (
+            ? dataActivity.sessions.map((act, i) => (act.numberSession == 1 ?
+              <div>
                 <button
                   className="buttons-sessions"
                   onClick={() => setSession(act.numberSession)}
                   key={i}
                 >
-                  Sesión {act.numberSession}
+                  <label>HOY, 10:00</label>
                 </button>
-              ))
+              </div> : act.numberSession == 2 ?
+                <div>
+                  <button
+                    className="buttons-sessions"
+                    onClick={() => setSession(act.numberSession)}
+                    key={i}
+                  >
+                    <label> SABADO, 10:00</label>
+                  </button>
+                </div> : act.numberSession == 3 ? <div><button
+                  className="buttons-sessions"
+                  onClick={() => setSession(act.numberSession)}
+                  key={i}
+                >
+                  <label>  DOMINGO, 10:00</label>
+                </button>
+                </div> : "")
+
+            )
             : ""}
         </div>
       </div>
-
+      <p className="titles-sesiones">Monitor</p>
       <div className="ProfessorInfo">
         <img src={profesorAvatar} alt="" />
-        <p>Profesor: Manuel</p>
+        <div className="entreParraf">
+
+          <p>Pedro Álvarez</p>
+          {dataActivity ? <div><p>Monitor de {dataActivity.name}</p></div> : ""}
+
+        </div>
       </div>
 
       <div className="participants">
