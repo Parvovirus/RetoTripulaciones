@@ -52,6 +52,7 @@ const Portal = () => {
 
   return (
     <div className='Portal'>
+
       {viewButton ?
         <div className="button-position">
           <img className="buttonBack button-position" src={Buttonb} onClick={() => { setViewCategories(true); setViewButton(false) }}>
@@ -59,8 +60,8 @@ const Portal = () => {
         </div>
         : ""}
 
-
       {viewCategories ? <div className='navbar-top-fixed'>
+
         <div className='perfilname'>
           {user && auth ?
             <img src={user.data.data[0].avatar}></img> : ""}

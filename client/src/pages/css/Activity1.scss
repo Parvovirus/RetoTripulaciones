@@ -5,9 +5,11 @@
     flex-wrap     : wrap;
 
     >img {
-        width      : 130%;
-        margin-left: -10%;
-        margin-top : -2%;
+
+        width: 100%; 
+    }
+    >.prox-sessiones{
+
     }
 
 }
@@ -61,11 +63,12 @@
 
 .participants {
 
-    margin-top : 5%;
-    width      : 90%;
-    margin-left: 5%;
-    padding    : 4%;
-    height     : 30vh;
+ 
+    margin-top: 5%;
+    width: 90%;
+    padding: 4%;
+    margin-bottom: 30%;
+   
 
 }
 
@@ -106,8 +109,10 @@
 
 .participants {
 
-    display  : flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-column-gap: 4%;
+    grid-row-gap: 8%;
 
     >h2 {
 
@@ -116,15 +121,12 @@
 
     >div>img {
 
+        width           :90%;
+        border-radius: 50%;
+        padding: 4%;
+        border: solid 2px rgb(173, 173, 173);  
 
-        width: 90%;
-
-        border-radius   : 50%;
-        padding         : 4%;
-        border          : solid 2px rgb(173, 173, 173);
         // margin       : 5%;   
-
-
 
     }
 }
@@ -133,17 +135,18 @@
 
 
     /* Primary/Dark */
-
-    border        : 1px solid #004747;
-    box-sizing    : border-box;
-    border-radius : 4px;
-    color         : #009E9E;
-    padding-left  : 5%;
-    padding-right : 5%;
-    padding-top   : 2%;
+ 
+    border: 1px solid #004747;
+    box-sizing: border-box;
+    border-radius: 4px;
+    color: #009E9E;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 2%;
     padding-bottom: 2%;
-    font-weight   : bold;
-    margin-bottom : 2%;
+    font-weight: bold;
+    margin-bottom: 2%;
+    font-size: 13px;
 }
 
 .buttons-sessions:focus {
@@ -151,4 +154,17 @@
     background: #009E9E;
 }
 
+
+ 
+.container-subscription-button{
+
+ display: flex;
+ flex-direction: column;
+ >button{
+    margin-bottom: 30%;
+ }
+ 
+}
+
 .sessions-container {}
+
