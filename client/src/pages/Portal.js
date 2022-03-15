@@ -50,7 +50,10 @@ const Portal = () => {
 
   return (
     <div className='Portal'>
+
+  
       <div className='navbar-top-fixed'>
+
         <div className='perfilname'>
           {user && auth ? <img src={user.data.data[0].avatar}></img> : ""}
           {user && auth  ? <span> Hola, <span className="namebold">{user.data.data[0].name}</span></span> : ""}

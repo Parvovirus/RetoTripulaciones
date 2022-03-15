@@ -5,9 +5,7 @@ const activitiesModel = require("../models/activity.model");
 const jwt = require("jsonwebtoken");
 
 const user = {
-  
   checkData: async (req, res) => {
-
     const { idCoHousing, nameUser, tlfUser, dateUser } = req.body;
 
     const checkCoHousing = await colivingModel.findOne({
@@ -16,7 +14,6 @@ const user = {
 
     if (!checkCoHousing) {
       res.json({ message: "No existe el co housing" });
-
     } else {
       let existVeriCohUser = "";
       for (let i = 0; i < checkCoHousing.guiatlf.length; i++) {
@@ -25,19 +22,17 @@ const user = {
           existVeriCohUser = tlfUser;
         }
       }
-      console.log(existVeriCohUser)
+      console.log(existVeriCohUser);
 
       //Si está en la whiteList
       if (existVeriCohUser) {
         //  console.log("Cohouse tiene registrado tlf en su guia, puede registrarse el user")
         const checkExistUser = await userModel.findOne({ phone: tlfUser });
-        console.log(checkExistUser)
+        console.log(checkExistUser);
 
         if (checkExistUser) {
           res.json({ message: "Ya estaba registrada " });
-        }
-        else {
-
+        } else {
           const insertUser = new userModel({
             name: nameUser,
             age: dateUser,
@@ -50,14 +45,15 @@ const user = {
             date: "",
             genere: "",
             cp: "",
-            activities: []
+            activities: [],
           });
           insertUser.save();
           res.json({ message: "Datos correctos", dataRegisterUser: req.body });
         }
-
       } else {
-        res.json({ message: "cohouse no te tiene registrado, contacte con un admin " });
+        res.json({
+          message: "cohouse no te tiene registrado, contacte con un admin ",
+        });
       }
     }
   },
@@ -66,13 +62,13 @@ const user = {
     const { phone } = req.body;
 
     const existUser = await userModel.findOne({ phone });
-    console.log("code")
-    console.log(existUser)
+    console.log("code");
+    console.log(existUser);
     try {
       if (existUser != null) {
         payload = {
           id: existUser.idUser,
-          location: "madrid"
+          location: "madrid",
         };
 
         const token = jwt.sign(payload, process.env.SECRET);
@@ -88,7 +84,7 @@ const user = {
           status: false,
         });
       }
-    } catch (error) { }
+    } catch (error) {}
   },
 
   search: async (req, res) => {
@@ -101,58 +97,109 @@ const user = {
     console.log("llega");
     const users = await userModel.find();
 
- 
     res.json(users);
   },
 
   dataUser: async (req, res) => {
-
     const users = await userModel.find({ idUser: req.userId });
-    res.json(
-      {
-        data: users,
-        auth: true
-      }
-    );
+    res.json({
+      data: users,
+      auth: true,
+    });
   },
   getOneUser: async (req, res) => {
     const user = await userModel.findOne();
     res.json(user);
-
   },
-  savePlan: async (req,res)=>{
+  savePlan: async (req, res) => {
+    const { idUser, session, idActivity } = req.body;
 
- const {idUser,session,idActivity} =req.body
-    
+    console.log(req.body)
+    let idParser = parseInt(idActivity);
+
+    let arrayClean = [];
+
+    const userData = await userModel.find({ idUser });
+
+    let userClean = userData[0].activities;
+
+    for (let index = 0; index < userClean.length; index++) {
+      const element = userClean[index];
+
+      if (element.idActivity !== idParser) {
+        arrayClean.push(element);
+      }
+    }
+
+    arrayClean.push({
+      idActivity: idActivity,
+      status: "process",
+      session,
+      date: "01/03/2022",
+
+    });
+
+///OK
+  /*   await userModel.findOneAndUpdate(
+      { idUser },
+      { $pull: { activities: { idActivity: 1 } } },
+      { safe: true, multi: false }
+    ); */
  
-  
- let obj= {
-  session ,
-  idActivity,
-  idUser 
-
-} 
-
-/* console.log(obj)
+//////ok
 
 
-    await userModel.findOneAndUpdate(
-      { idUser  },
-      { $push: { plans:  obj } },
+const query = { idUser };
+const update = { $set: { 'activities.$[elem].status': 'process' ,'activities.$[elem].session': session} };
+const options = { new: true, arrayFilters: [{ 'elem.idActivity': idParser }]};
+await userModel.findOneAndUpdate(query, update, options);
+
+
+
+
+
+    /*  let filtrado = userClean.filter((user)=>user.activities[0].idActivity!==1) */
+
+    /*     let filtrado = userData[0].filter((user)=>user.activities.idActivity!==1)
+
+    console.log(filtrado )
+ */
+
+    /* 
+
+  userModel.findOneAndUpdate(
+      {idUser, 
+        
+        activities: {$elemMatch: {idActivity: idlimio}}},
+      {$set: {'activities.$.status': "process" }}, // list fields you like to change
+      {'new': true, 'safe': true, 'upsert': true});
+
+
+      console.log(data) */
+    /*  await userModel.findOneAndUpdate(
+      { idUser},
+      { $push: {activities: { arrayClean[]}  } },
     
     ); */
 
-    model.update(
-      { _id: 1, "items.id": "2" },
-      {
-          $set: {
-              "items.$.name": "yourValue",
-              "items.$.value": "yourvalue",
-           }
-      }
-  )
-  
+    /*   
+  console.log("entraaaaaaaa")
+ 
+  for (let index = 0; index < newOrder.length; index++) {
+    
+
+    order.push(prueba);
   }
+ */
+
+    /*   await OrderModel.findOneAndUpdate(
+    { idOrder: orderAllData.idOrder },
+    { $push: { order:  order } },
+  
+  );
+
+  */
+  },
 };
 
-module.exports = user; 
+module.exports = user;

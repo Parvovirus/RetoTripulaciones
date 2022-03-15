@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import profesorAvatar from "../img/profesor.jpg";
 import "./css/Activity1.scss";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { circlesArray } from "../circles.js";
 import useAxiosAuth from "../hooks/useAxiosAuth";
 
 const Activities = () => {
+  const navigate=useNavigate()
   const [users, setUsers] = useState();
   const [allUsers, setAllUsers] = useState();
   const [session, setSession] = useState();
@@ -15,6 +16,7 @@ const Activities = () => {
   const [circles, setCircles] = useState("");
   const [idUser, setIdUser] = useState("");
   const [subscription, setSubscription] = useState("");
+  const [showButton, setShowbutton] = useState(false);
 
   useEffect(() => {
     getBannerAct();
@@ -33,19 +35,17 @@ const Activities = () => {
         (dat) => dat.idActivity == idact
       );
 
-      if(demos){
+      if (demos) {
         if (demos[0].status == "process") {
-          setSubscription(true);
-        }else if(demos[0].status !== "process"){
-
-          console.log("nada")
+          setSubscription({
+            status: true,
+            session: demos[0].session,
+          });
+        } else if (demos[0].status !== "process") {
         }
-  
-      }else {
-
-        console.log("vete a freir espaarggos")
+      } else {
       }
-      
+
       setIdUser(datauser.data.data[0].idUser);
     }
   }, [datauser]);
@@ -59,53 +59,37 @@ const Activities = () => {
   // console.log(session)
 
   //!Seleciona a los users que se han apuntado a la actividad
-   
-  const getUsers =  async () => {
-  await  axios.get("/getusers").then((res) => {
+
+  const getUsers = async () => {
+    await axios.get("/getusers").then((res) => {
       let cleanUsers = res.data;
       let idActivity = idact;
 
       setAllUsers(res.data);
 
-
-      console.log(idActivity)
-      console.log(cleanUsers)
-
-
-      // [userss] -> filtrado por actividad elegida
-    /*   let userss = cleanUsers.filter((act) => {
-        if (act.activities[0].idActivity == `${idActivity}`) {
-          return act;
-        }
-      }); */
-
-      
-      let userss = cleanUsers.filter((act) => act.activities[0].idActivity == `${idActivity}` );
+      let userss = cleanUsers.filter(
+        (act) => act.activities[0].idActivity == `${idActivity}`
+      );
 
       setUsers(userss);
     });
   };
 
-  /*   user.avatar=="../img/circle.jpg"? alert("no"): alert("si")} */
-
   const savePlan = () => {
     let obj = {
-      session: 1,
+      session,
       idActivity: idact,
       idUser: idUser,
+      status: "none",
     };
 
-    console.log(obj);
+ 
 
     axios.post("/saveplan", obj);
-    /*   let obj= {
-  session: 1,
-  idActivity: idact,
-  idUser: idUser
 
-}  
+    
 
-   axios.post("/saveplan",obj) */
+    navigate(`/reserved/${idact}`)
   };
 
   //! Se pasan los filtros de los usuarios por la session que se han apuntado
@@ -117,15 +101,16 @@ const Activities = () => {
         }
       });
 
-
+      console.log(filtrado.length);
       let length = 20 - filtrado.length;
-      let filterLength = 10 - length;
+
+      let filterLength = 20 - length;
 
       for (let index = filterLength; index < circlesArray.length; index++) {
         filtrado.push(circlesArray[index]);
       }
 
-      return filtrado.map((user, i) => {
+      let datos = filtrado.map((user, i) => {
         return (
           <div key={i}>
             <img
@@ -137,6 +122,8 @@ const Activities = () => {
           </div>
         );
       });
+
+      return datos;
     } else if (session == 2) {
       let filtrado = users.filter((act) => {
         if (act.activities[0].session == session) {
@@ -144,7 +131,6 @@ const Activities = () => {
         }
       });
 
-
       let length = 20 - filtrado.length;
       let filterLength = 20 - length;
 
@@ -155,19 +141,22 @@ const Activities = () => {
       return filtrado.map((user, i) => {
         return (
           <div key={i}>
-            <img src={user.avatar} />
+            <img
+              src={user.avatar}
+              onClick={() =>
+                user.avatar == "../img/circle.jpg" ? savePlan(2) : ""
+              }
+            />
           </div>
         );
       });
     } else if (session == 3) {
-
       let filtrado = users.filter((act) => {
         if (act.activities[0].session == session) {
           return act;
         }
       });
 
-
       let length = 20 - filtrado.length;
       let filterLength = 20 - length;
 
@@ -178,7 +167,12 @@ const Activities = () => {
       return filtrado.map((user, i) => {
         return (
           <div key={i}>
-            <img src={user.avatar} />
+            <img
+              src={user.avatar}
+              onClick={() =>
+                user.avatar == "../img/circle.jpg" ? savePlan(3) : ""
+              }
+            />
           </div>
         );
       });
@@ -187,6 +181,50 @@ const Activities = () => {
 
   // document.querySelector
 
+  const paintButton = () => {
+    if (session != "") {
+      if (
+        session == 1 &&
+        subscription.status == true &&
+        subscription.session == 1
+      ) {
+        return (
+      
+            <button className=" register">
+              Cancelar subscripción
+            </button>
+           
+         
+        );
+      } else if (
+        session == 2 &&
+        subscription.status == true &&
+        subscription.session == 2
+      ) {
+        return (
+       
+            <button className=" register">
+              Cancelar subscripción
+            </button>
+            
+       
+        );
+      } else if (
+        session == 3 &&
+        subscription.status == true &&
+        subscription.session == 3
+      ) {
+        return (
+       
+            <button className=" register">
+              Cancelar subscripción
+            </button>
+          
+        );
+      }
+    } else {
+    }
+  };
   return (
     <div className="Activity1">
       {/* Banner de la actividad */}
@@ -197,8 +235,9 @@ const Activities = () => {
         ""
       )}
       <div className="prox-sessiones">
-
         {/* Se pinta botones de las sessiones que hay */}
+        {dataActivity ? <p className="titles-sesiones nameAct">{dataActivity.name} </p> : ""}
+      <p className="titles-sesiones">Próximas Sesiones</p>
         <div className="sessions-container">
           {dataActivity
             ? dataActivity.sessions.map((act, i) => (
@@ -207,7 +246,9 @@ const Activities = () => {
                   onClick={() => setSession(act.numberSession)}
                   key={i}
                 >
-                  Sesión {act.numberSession}
+               {act.numberSession==1? "Hoy: 10:00" : ""}
+               {act.numberSession==2? "Sábado: 10:00" : ""}
+               {act.numberSession==3? "Domingo: 10:00" : ""}
                 </button>
               ))
             : ""}
@@ -218,18 +259,16 @@ const Activities = () => {
         <img src={profesorAvatar} alt="" />
         <p>Profesor: Manuel</p>
       </div>
-
-      <div className="participants">
+      <div>
+        {" "}
         <h2>Plazas Disponibles</h2>
-
-        {paintUsers()}
-
       </div>
-      {subscription == true ? (
-        <button className="login">Cancelar subscripción</button>
-      ) : (
-        ""
-      )}
+      <div className="participants">{paintUsers()}
+      
+    
+      </div>
+      <div className="container-subscription-button  ">{paintButton()}</div>
+      
 
       <Navbar />
     </div>
