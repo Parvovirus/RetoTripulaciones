@@ -43,7 +43,7 @@ const Planes = () => {
             let cleanActivity = res.data;
             let datos = cleanActivity.filter((dat)=>dat.status=="process")
 
-            console.log(datos)
+            console.log(cleanActivity)
 
             setAllActivities(datos);
 
@@ -66,7 +66,7 @@ const Planes = () => {
                         <Col className="bannerAtc">
 
 
-                            <img src={act.bannerSelec}></img>
+                            <img src={require(`${act.bannerSelec}`)}></img>
 
                         </Col>
                     </Row>

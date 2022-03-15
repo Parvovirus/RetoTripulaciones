@@ -30,14 +30,19 @@ const activity = {
 
         for (let index = 0; index < activities.length; index++) {
             const element = activities[index];
-
+         
+   
 
             for (let index = 0; index < actividadesUsuario.length; index++) {
                 const element2 = actividadesUsuario[index];
 
+              
 
                 if (element.idActivity == element2.idActivity){
                     
+
+
+
                     let obj1 = {
 
                         nameAct: element.name,
@@ -46,7 +51,7 @@ const activity = {
                         status: element2.status,
                         session: element2.session,
                         date: element2.date,
-                        bannerSelec: element2.bannerSelec
+                        bannerSelec: element.bannerSelec
 
                     }
           
@@ -58,8 +63,9 @@ const activity = {
         }
 
  
+console.log(arrayPlanes)
 
-
+     
      
 
         res.json(arrayPlanes);
