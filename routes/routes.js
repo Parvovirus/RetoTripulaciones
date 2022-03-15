@@ -5,7 +5,6 @@ const activities =require("../controllers/activities.controllers")
 
 const verifytoken =require("../verifyToken")
 
-router.post("/register", user.registro);
 router.post("/checkdata", user.checkData);
 router.post("/login", user.login);
 router.post("/search", user.search);

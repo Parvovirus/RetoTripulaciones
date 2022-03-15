@@ -45,7 +45,8 @@ const activity = {
                         banner: element.banner,
                         status: element2.status,
                         session: element2.session,
-                        date: element2.date
+                        date: element2.date,
+                        bannerSelec: element2.bannerSelec
 
                     }
           

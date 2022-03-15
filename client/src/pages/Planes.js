@@ -41,12 +41,12 @@ const Planes = () => {
         console.log(filter)
         axios.post("/getactivitiesuser", filter).then((res) => {
             let cleanActivity = res.data;
-
             let datos = cleanActivity.filter((dat)=>dat.status=="process")
 
             console.log(datos)
 
             setAllActivities(datos);
+
         })
 
     }
@@ -64,7 +64,10 @@ const Planes = () => {
                        
                         </Col>
                         <Col className="bannerAtc">
-                            <img src={act.banner}></img>
+
+
+                            <img src={act.bannerSelec}></img>
+
                         </Col>
                     </Row>
                 </Container>

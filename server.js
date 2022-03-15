@@ -5,13 +5,21 @@ const app = express();
 // Cyberg (Para dificultar el entendimiento del código, recoger los endpoints de diferentes archivos, carpetas)
 const router = require("./routes/routes");
 const path = require("path");
-const connect = require("./database/mongo");
+require("./database/mongo");
 
 app.use(express.json());
 app.use(express.static("public"));
 app.use("/", router);
 
 
-const port = 5500;
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("client/build"));
+
+    app.get("*", (req, res) => {
+        res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+    });
+}
+
+const port = process.env.PORT || 5500;
 
 app.listen(port, console.log("Server ON"));

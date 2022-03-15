@@ -99,6 +99,7 @@ const Activities = () => {
         }
       });
 
+
       let length = 20 - filtrado.length;
       let filterLength = 10 - length;
 
@@ -125,6 +126,7 @@ const Activities = () => {
         }
       });
 
+
       let length = 20 - filtrado.length;
       let filterLength = 20 - length;
 
@@ -140,11 +142,13 @@ const Activities = () => {
         );
       });
     } else if (session == 3) {
+
       let filtrado = users.filter((act) => {
         if (act.activities[0].session == session) {
           return act;
         }
       });
+
 
       let length = 20 - filtrado.length;
       let filterLength = 20 - length;
@@ -168,12 +172,14 @@ const Activities = () => {
   return (
     <div className="Activity1">
       {/* Banner de la actividad */}
+
       {dataActivity ? (
-        <img src={require(`${dataActivity.banner}`)} alt="" />
+        <img src={require(`${dataActivity.banner.bannerSelec}`)} alt="" />
       ) : (
         ""
       )}
       <div className="prox-sessiones">
+
         {/* Se pinta botones de las sessiones que hay */}
         <div className="sessions-container">
           {dataActivity
@@ -199,7 +205,7 @@ const Activities = () => {
         <h2>Plazas Disponibles</h2>
 
         {paintUsers()}
-        {/*   {circles()} */}
+
       </div>
       {subscription == true ? (
         <button className="login">Cancelar subscripción</button>
