@@ -8,6 +8,7 @@ const activity = {
         const activities = await activityModel.find();
         res.json(activities);
     },
+    
 
     getOneActivity: async (req, res) => {
         const { idActivity } = req.body;

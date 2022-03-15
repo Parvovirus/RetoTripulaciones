@@ -14,7 +14,8 @@ const objetoUserSchema = {
     date: String,
     genere: String,
     cp: String,
-    activities: Array
+    activities: Array,
+    plans: Array
 
 };
 

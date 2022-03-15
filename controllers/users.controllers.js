@@ -100,6 +100,8 @@ const user = {
   getUsers: async (req, res) => {
     console.log("llega");
     const users = await userModel.find();
+
+ 
     res.json(users);
   },
 
@@ -118,6 +120,39 @@ const user = {
     res.json(user);
 
   },
+  savePlan: async (req,res)=>{
+
+ const {idUser,session,idActivity} =req.body
+    
+ 
+  
+ let obj= {
+  session ,
+  idActivity,
+  idUser 
+
+} 
+
+/* console.log(obj)
+
+
+    await userModel.findOneAndUpdate(
+      { idUser  },
+      { $push: { plans:  obj } },
+    
+    ); */
+
+    model.update(
+      { _id: 1, "items.id": "2" },
+      {
+          $set: {
+              "items.$.name": "yourValue",
+              "items.$.value": "yourvalue",
+           }
+      }
+  )
+  
+  }
 };
 
 module.exports = user; 
