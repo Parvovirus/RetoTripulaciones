@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import profesorAvatar from "../img/profesor.jpg";
+import profesorAvatar from "../img/profesor.png";
 import "./css/Activity1.scss";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
@@ -44,6 +44,7 @@ const Activities = () => {
         } else if (demos[0].status !== "process") {
         }
       } else {
+
       }
 
       setIdUser(datauser.data.data[0].idUser);
@@ -236,11 +237,14 @@ const Activities = () => {
       )}
       <div className="prox-sessiones">
         {/* Se pinta botones de las sessiones que hay */}
+
         {dataActivity ? <p className="titles-sesiones nameAct">{dataActivity.name} </p> : ""}
       <p className="titles-sesiones">Próximas Sesiones</p>
+
         <div className="sessions-container">
           {dataActivity
-            ? dataActivity.sessions.map((act, i) => (
+            ? dataActivity.sessions.map((act, i) => (act.numberSession == 1 ?
+              <div>
                 <button
                   className="buttons-sessions"
                   onClick={() => setSession(act.numberSession)}
@@ -249,15 +253,23 @@ const Activities = () => {
                {act.numberSession==1? "Hoy: 10:00" : ""}
                {act.numberSession==2? "Sábado: 10:00" : ""}
                {act.numberSession==3? "Domingo: 10:00" : ""}
+
                 </button>
-              ))
+                </div> : "")
+
+            )
             : ""}
         </div>
       </div>
-
+      <p className="titles-sesiones">Monitor</p>
       <div className="ProfessorInfo">
         <img src={profesorAvatar} alt="" />
-        <p>Profesor: Manuel</p>
+        <div className="entreParraf">
+
+          <p>Pedro Álvarez</p>
+          {dataActivity ? <div><p>Monitor de {dataActivity.name}</p></div> : ""}
+
+        </div>
       </div>
       <div>
         {" "}

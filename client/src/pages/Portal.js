@@ -3,9 +3,9 @@ import CategoryBanner from '../components/CategoryBanner'
 import Search from "../components/Search"
 import { useNavigate, Link } from "react-router-dom";
 import "./css/Portal.scss"
+import Buttonb from "../components/icons/Buttonb.png"
 import axios from 'axios'
 import Navbar from '../components/Navbar'
-import Recommended from '../components/Recommended'
 import useAxiosAuth from "../hooks/useAxiosAuth";
 
 
@@ -15,24 +15,26 @@ const Portal = () => {
   const navigate = useNavigate();
   const [allActivities, setAllActivities] = useState("")
   const [filterCategory, setFilterCategory] = useState("")
+  const [viewCategories, setViewCategories] = useState(true)
+  const [viewButton, setViewButton] = useState(false);
 
 
 
-  const [user ,auth] = useAxiosAuth("datauser");
- 
+  const [user, auth] = useAxiosAuth("datauser");
 
-  
+
+
   useEffect(() => {
-    if(auth===true){
+    if (auth === true) {
 
-   navigate("/portal")
-   } else if(auth===false){
+      navigate("/portal")
+    } else if (auth === false) {
 
-    navigate("/")
-   }
+      navigate("/")
+    }
 
- }, [auth])
-  
+  }, [auth])
+
 
   useEffect(() => {
     bannerActivities();
@@ -51,22 +53,32 @@ const Portal = () => {
   return (
     <div className='Portal'>
 
-  
-      <div className='navbar-top-fixed'>
+      {viewButton ?
+        <div className="button-position">
+          <img className="buttonBack button-position" src={Buttonb} onClick={() => { setViewCategories(true); setViewButton(false) }}>
+          </img>
+        </div>
+        : ""}
+
+      {viewCategories ? <div className='navbar-top-fixed'>
 
         <div className='perfilname'>
-          {user && auth ? <img src={user.data.data[0].avatar}></img> : ""}
-          {user && auth  ? <span> Hola, <span className="namebold">{user.data.data[0].name}</span></span> : ""}
+          {user && auth ?
+            <img src={user.data.data[0].avatar}></img> : ""}
+          {user && auth ?
+            <span> Hola, <span className="namebold">{user.data.data[0].name}</span></span>
+            : ""}
         </div>
         <Search />
-      </div>
-      <CategoryBanner setFilter={setFilterCategory} />
-      <Recommended />
+        <CategoryBanner setFilter={setFilterCategory} setHidden={setViewCategories} setButton={setViewButton} />
+      </div> : ""}
+
 
       {/* {filterCategory ? console.log(filterCategory) : ""} */}
 
       {/* Existe allActivities ? ->  */}
       <div className='cont-actividades'>
+      <p className='title-recomended'>Recomendados</p>
         {allActivities ?
           // Para pintar todas no tiene que haber filtro de categorías
           (!filterCategory ? allActivities.map((act, i) =>
