@@ -8,6 +8,7 @@ const objetoUserSchema = {
     description: String,
     sessions: Array,
     banner: String,
+    bannerSelec: String
     
 };
 

@@ -33,10 +33,19 @@ const Activities = () => {
         (dat) => dat.idActivity == idact
       );
 
-      if (demos[0].status == "process") {
-        setSubscription(true);
-      }
+      if(demos){
+        if (demos[0].status == "process") {
+          setSubscription(true);
+        }else if(demos[0].status !== "process"){
 
+          console.log("nada")
+        }
+  
+      }else {
+
+        console.log("vete a freir espaarggos")
+      }
+      
       setIdUser(datauser.data.data[0].idUser);
     }
   }, [datauser]);
@@ -50,19 +59,28 @@ const Activities = () => {
   // console.log(session)
 
   //!Seleciona a los users que se han apuntado a la actividad
-  const getUsers = () => {
-    axios.get("/getusers").then((res) => {
+   
+  const getUsers =  async () => {
+  await  axios.get("/getusers").then((res) => {
       let cleanUsers = res.data;
       let idActivity = idact;
 
       setAllUsers(res.data);
 
+
+      console.log(idActivity)
+      console.log(cleanUsers)
+
+
       // [userss] -> filtrado por actividad elegida
-      let userss = cleanUsers.filter((act) => {
+    /*   let userss = cleanUsers.filter((act) => {
         if (act.activities[0].idActivity == `${idActivity}`) {
           return act;
         }
-      });
+      }); */
+
+      
+      let userss = cleanUsers.filter((act) => act.activities[0].idActivity == `${idActivity}` );
 
       setUsers(userss);
     });
@@ -174,7 +192,7 @@ const Activities = () => {
       {/* Banner de la actividad */}
 
       {dataActivity ? (
-        <img src={require(`${dataActivity.banner.bannerSelec}`)} alt="" />
+        <img src={require(`${dataActivity.bannerSelec}`)} alt="" />
       ) : (
         ""
       )}
