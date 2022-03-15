@@ -61,8 +61,8 @@ const Activities = () => {
 
       return users.filter((act) => { if (act.activities[0].session == session) { return act } }).map((user, i) => {
         return (<div key={i}>
-       
-          <img   src={user.avatar} />
+
+          <img src={user.avatar} />
         </div>)
       })
 
@@ -70,8 +70,8 @@ const Activities = () => {
     } else if (session == 2) {
       return users.filter((act) => { if (act.activities[0].session == session) { return act } }).map((user, i) => {
         return (<div key={i}>
-       
-       <img   src={user.avatar} />
+
+          <img src={user.avatar} />
         </div>)
       })
 
@@ -79,8 +79,8 @@ const Activities = () => {
     } else if (session == 3) {
       return users.filter((act) => { if (act.activities[0].session == session) { return act } }).map((user, i) => {
         return (<div key={i}>
-       
-       <img   src={user.avatar} />
+
+          <img src={user.avatar} />
         </div>)
       })
 
@@ -94,11 +94,13 @@ const Activities = () => {
     <div className="Activity1">
 
       {/* Banner de la actividad */}
-      {dataActivity ? <img src={require(`${dataActivity.banner}`)} alt="" /> : ""}
+      {dataActivity ? <img src={require(`${dataActivity.bannerSelec}`)} alt="" /> : ""}
+      {dataActivity ? console.log(dataActivity) : ""}
+
       <div className="prox-sessiones">
 
 
-      
+
         {/* Se pinta botones de las sessiones que hay */}
         <div className="sessions-container">
           {dataActivity ? dataActivity.sessions.map((act, i) => <button className="buttons-sessions" onClick={() => setSession(act.numberSession)} key={i}>Sesión {act.numberSession}</button>) : ("")}
@@ -114,10 +116,10 @@ const Activities = () => {
 
 
       <div className="participants">
- <h2>Plazas Disponibles</h2> 
- 
-      {paintUsers()} 
-     
+        <h2>Plazas Disponibles</h2>
+
+        {paintUsers()}
+
       </div>
       <Navbar />
     </div>

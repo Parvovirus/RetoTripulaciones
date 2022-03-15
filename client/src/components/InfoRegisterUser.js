@@ -17,7 +17,7 @@ function InfoRegisterUser(props) {
   // const[registerData,setRegisterData] = useState([]);
 
   const test = () => {
-    console.log(props.hidden);
+
     let filtro = {
       idCoHousing,
       nameUser,
@@ -25,9 +25,26 @@ function InfoRegisterUser(props) {
       dateUser,
     };
 
-    if (!idCoHousing | !nameUser | !tlfUser | !dateUser) {
+    var regExpCode = new RegExp(/\d{9}/);
+    var regExpName = new RegExp(/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]+$/u);
+    var regExpTlf = new RegExp(/\d{9}/);
+    // var regExpBirth = new RegExp(/^(19[123456])\d[1234567]{1}\d/);
+
+    const idCoHousingOk = regExpCode.test(idCoHousing);
+    const nameUserOk = regExpName.test(nameUser);
+    const tlfUserOk = regExpTlf.test(tlfUser);
+    const dateUserOk = ( dateUser > 1912 && dateUser < 1967); 
+    // console.log(idCoHousingOk)
+    // console.log(nameUserOk)
+    // console.log(tlfUserOk)
+    // console.log(dateUserOk)
+
+    
+    if (!idCoHousingOk | !nameUserOk | !tlfUserOk | !dateUserOk) {
       alert("revisa los campos");
     } else {
+      
+      console.log(filtro)
       axios.post("checkdata", filtro).then((res) => {
         alert(res.data.message);
         if (res.data.dataRegisterUser) {
