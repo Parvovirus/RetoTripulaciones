@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import Search from "./icons/Search.png";
 import Micro from "./icons/Microphone.png";
 import "./css/Search.scss";
-
 function Filter() {
 
     const [searchData, setSearchData] = useState("");
@@ -25,11 +24,12 @@ function Filter() {
     }
     return (
         <div className="App">
-            <div className="div-search">
-                <img className="icons isearch" src={Search}></img>
-                <input placeholder="Buscar Actividad" onChange={(e) => setSearchData(e.target.value)} />
-                <img className="icons imicro" src={Micro}></img>
-            </div>
+
+        <div className="div-search">
+            <img className="icons isearch" src={Search}></img>
+            <input placeholder="Buscar Actividad" onChange={(e) => setSearchData(e.target.value)} />
+            <img className="icons imicro" src={Micro}></img>
+        </div>
 
             {/* {resultsData != "" ? resultsData.map((result) => {
                 return (<div> 
