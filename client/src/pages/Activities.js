@@ -275,9 +275,6 @@ const Activities = () => {
 
       </div>
       <div className="container-subscription-button  ">{paintButton()}</div>
-
-
-      <Navbar />
     </div>
   );
 };

@@ -2,11 +2,12 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link } from 'react-router-dom'
 import "./css/InfoRegisterUser.scss";
-import Buttonb from "./icons/Buttonb.png"
+import Buttonb from "./icons/Buttonb.png";
 import Home from "./icons/Home.png";
 import Name from "./icons/Profile.png";
 import Tlf from "./icons/Call.png";
 import Age from "./icons/Calandar.png";
+
 
 function InfoRegisterUser(props) {
   const [idCoHousing, setidCoHousing] = useState("");
@@ -34,10 +35,7 @@ function InfoRegisterUser(props) {
     const nameUserOk = regExpName.test(nameUser);
     const tlfUserOk = regExpTlf.test(tlfUser);
     const dateUserOk = ( dateUser > 1912 && dateUser < 1967); 
-    // console.log(idCoHousingOk)
-    // console.log(nameUserOk)
-    // console.log(tlfUserOk)
-    // console.log(dateUserOk)
+  
 
     
     if (!idCoHousingOk | !nameUserOk | !tlfUserOk | !dateUserOk) {
