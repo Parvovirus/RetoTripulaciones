@@ -11,7 +11,7 @@ const Reserved = () => {
  
         <img src={confirmed} alt="" />
 
-        <button className='login'> <Link to={`/act1/${id}`}>Aceptar</Link></button>
+        <button className='login'> <Link to={`/planes`}>Aceptar</Link></button>
     </div>
   )
 }

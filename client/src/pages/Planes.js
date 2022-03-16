@@ -38,13 +38,11 @@ const Planes = () => {
         let filter = {
             idUser: user.data.data[0].idUser
         }
-        console.log(filter)
-        axios.post("/getactivitiesuser", filter).then((res) => {
+         axios.post("/getactivitiesuser", filter).then((res) => {
             let cleanActivity = res.data;
             let datos = cleanActivity.filter((dat)=>dat.status=="process")
 
-            console.log(cleanActivity)
-
+ 
             setAllActivities(datos);
 
         })
@@ -52,8 +50,7 @@ const Planes = () => {
     }
 
 
-
-    return (
+     return (
         <div className='Planes'>
             <h1>Planes</h1>
             {allActivities ? allActivities.map((act, i) =>
@@ -66,7 +63,7 @@ const Planes = () => {
                         <Col className="bannerAtc">
 
 
-                            <img src={require(`${act.bannerSelec}`)}></img>
+                            <img  onClick={()=>navigate(`/activityreserved/${act.idAct}/${act.session}`)} src={require(`${act.bannerSelec}`)}></img>
 
                         </Col>
                     </Row>

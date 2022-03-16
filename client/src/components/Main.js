@@ -9,6 +9,7 @@ import Planes from "../pages/Planes"
 import "./css/Main.scss"
 import FaceId from './FaceId'
 import Reserved from "../pages/Reserved"
+import ActivityReserved from '../pages/ActivityReserved'
 
 
 
@@ -26,6 +27,7 @@ const Main = () => {
         <Route path='/planes' element={<Planes />} />
         <Route path='/reserved/:id' element={<Reserved />} />
         <Route path='/faceid' element={<FaceId />} />
+        <Route path='/activityreserved/:idact/:sessionact' element={<ActivityReserved />} />
 
       </Routes>
 

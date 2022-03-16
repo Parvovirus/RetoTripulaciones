@@ -13,6 +13,7 @@ router.get("/getusers", user.getUsers);
 router.get("/datauser", verifytoken, user.dataUser);
 router.post("/getoneuser", user.getOneUser);
 router.post("/saveplan",user.savePlan)
+router.post("/deleteplan",user.deletePlan)
 
 router.get("/getcategory", category.getCategories);
 
