@@ -24,6 +24,7 @@ function Filter() {
     }
     return (
         <div className="App">
+
         <div className="div-search">
             <img className="icons isearch" src={Search}></img>
             <input placeholder="Buscar Actividad" onChange={(e) => setSearchData(e.target.value)} />

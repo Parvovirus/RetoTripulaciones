@@ -193,51 +193,6 @@ const Activities = () => {
 
   // document.querySelector
 
-  const paintButton = () => {
-    if (session != "") {
-      if (
-        session == 1 &&
-        subscription.status == true &&
-        subscription.session == 1
-      ) {
-        return (
-
-          <button className="login">
-            Cancelar subscripción
-          </button>
-
-
-        );
-      } else if (
-        session == 2 &&
-        subscription.status == true &&
-        subscription.session == 2
-      ) {
-        return (
-
-          <button className="login">
-            Cancelar subscripción
-          </button>
-
-
-        );
-      } else if (
-        session == 3 &&
-        subscription.status == true &&
-        subscription.session == 3
-      ) {
-        return (
-
-          <button className="login">
-            Cancelar subscripción
-          </button>
-
-        );
-      }
-    } else {
-    
-    }
-  };
  
   return (
     <div className="Activity1">
@@ -282,18 +237,20 @@ const Activities = () => {
       </div>
       <div>
         {" "}
+
         <p className="titles-sesiones">Plazas Disponibles</p>
+
       </div>
       <div className="participants">{paintUsers()}
 
 
       </div>
+
       <div className="container-subscription-button  ">  {session!=undefined? <button onClick={()=>savePlan()} className="login">
             Apuntarme
           </button> : "" }</div>
-
-
       <Navbar />
+
     </div>
   );
 };

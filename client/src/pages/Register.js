@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import InfoRegisterUser from "../components/InfoRegisterUser";
 import FaceId from "../components/FaceId";
 import VerificationCode from "../components/VerificationCode";
+import BarraRegister from "../components/BarraRegister";
 import './css/Register.scss';
+
 
 
 function Register() {
@@ -17,10 +19,10 @@ function Register() {
 
     <div className="App">
       <div>
-    
         {viewRegister ? (<InfoRegisterUser saveDataUser={setDataRegisterUser} hidden={setViewRegister} show={setViewVerification} />) : ("")}
         {viewVerification ? (<VerificationCode hidden={setViewVerification} show={setViewFaceId} back={setViewRegister} />) : ("")}
         {viewFaceId ? (<FaceId />) : ("")}
+        <BarraRegister />
       </div>
     </div>
   );

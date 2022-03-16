@@ -19,7 +19,6 @@
         margin-bottom: 6%;
         width        : 100%;
         border       : 1.5px solid #B3B3B3;
-        box-sizing   : border-box;
         border-radius: 4px;
 
         >input {
@@ -27,6 +26,14 @@
             outline    : none;
             border     : 0;
         }
+
+    }
+
+    >.border-normal {
+        border: 1.5px solid #B3B3B3;
+    }
+    .border-green {
+        border-color: 1.5px solid #004747;
     }
 
 
@@ -74,6 +81,10 @@
     top: 250px;
 }
 
+.ihomegreen {
+    color: #009E9E;
+}
+
 .iname {
     top: 355px;
 }
@@ -81,7 +92,6 @@
 .itlf {
 
     top: 455px;
-
 }
 
 .iage {
