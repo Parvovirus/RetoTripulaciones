@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import "./css/Home.scss"
 import cohouse from "../img/COHAUSE.png";
-import Barra from "../components/Barra";
 
 const Home = () => {
   return (
@@ -15,10 +14,11 @@ const Home = () => {
 
       </div>
       <div className='buttons'>
-        <button id="button-login" className='login'><Link to={"/login"} > Iniciar sesión</Link></button>
+        <button className='login'><Link to={"/login"} > Iniciar sesión</Link></button>
         <button className='register'><Link to={"/register"} >Crear una cuenta</Link></button>
       </div>
-      <Barra />
+
+     
     </div>
   )
 }
