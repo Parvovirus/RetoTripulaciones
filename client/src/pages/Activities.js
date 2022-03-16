@@ -191,51 +191,6 @@ const Activities = () => {
 
   // document.querySelector
 
-  const paintButton = () => {
-    if (session != "") {
-      if (
-        session == 1 &&
-        subscription.status == true &&
-        subscription.session == 1
-      ) {
-        return (
-
-          <button className="login">
-            Cancelar subscripción
-          </button>
-
-
-        );
-      } else if (
-        session == 2 &&
-        subscription.status == true &&
-        subscription.session == 2
-      ) {
-        return (
-
-          <button className="login">
-            Cancelar subscripción
-          </button>
-
-
-        );
-      } else if (
-        session == 3 &&
-        subscription.status == true &&
-        subscription.session == 3
-      ) {
-        return (
-
-          <button className="login">
-            Cancelar subscripción
-          </button>
-
-        );
-      }
-    } else {
-    
-    }
-  };
  
   return (
     <div className="Activity1">
@@ -280,7 +235,7 @@ const Activities = () => {
       </div>
       <div>
         {" "}
-        <h2>Plazas Disponibles</h2>
+        <p className="titles-plazas">Plazas Disponibles</p>
       </div>
       <div className="participants">{paintUsers()}
 

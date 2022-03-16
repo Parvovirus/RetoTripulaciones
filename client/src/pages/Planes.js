@@ -4,7 +4,6 @@ import Navbar from '../components/Navbar'
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import useAxiosAuth from '../hooks/useAxiosAuth';
- 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./css/Planes.scss"
 
@@ -38,6 +37,11 @@ const Planes = () => {
         let filter = {
             idUser: user.data.data[0].idUser
         }
+
+        // fetch("http://3.14.80.216/api/model/recommender/643")
+        // .then((res)=>console.log(res.text))
+    
+        
          axios.post("/getactivitiesuser", filter).then((res) => {
             let cleanActivity = res.data;
             let datos = cleanActivity.filter((dat)=>dat.status=="process")
