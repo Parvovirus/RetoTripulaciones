@@ -4,9 +4,9 @@ import Navbar from '../components/Navbar'
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import useAxiosAuth from '../hooks/useAxiosAuth';
-import { Row, Col, Container } from 'react-bootstrap';
+ 
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import "./css/Planes.scss"
 
 
 const Planes = () => {
@@ -49,25 +49,38 @@ const Planes = () => {
 
     }
 
+console.log(allActivities)
 
+ 
      return (
         <div className='Planes'>
-            <h1>Planes</h1>
-            {allActivities ? allActivities.map((act, i) =>
-                <Container xm={6} key={i} className="card card-body">
-                    <Row>
-                        <Col>
-                            <p> {act.date} </p>
-                       
-                        </Col>
-                        <Col className="bannerAtc">
+            <h1>Mis Reservas</h1>
+            {allActivities ? allActivities.map((act, i) =>{
+                
+                let relative = require(`${act.bannerSelec}`)
+                console.log(relative)
 
+                return(
+           /*  <div key={i} className="card-container">
+<div className='card-hour'> HOY 10:00 </div>
+<div className='card-img ' onClick={()=>navigate(`/activityreserved/${act.idAct}/${act.session}`)} style={ {  backgroundImage:`url(${relative} )`,filter: "brightness(0.5)" , backgroundSize: 'cover' ,   }}>
+  
+  
+ <label >{act.nameAct}</label>
+</div>
 
-                            <img  onClick={()=>navigate(`/activityreserved/${act.idAct}/${act.session}`)} src={require(`${act.bannerSelec}`)}></img>
+             </div>)}   */
 
-                        </Col>
-                    </Row>
-                </Container>
+             <div key={i} className="card-container">
+             <div className='card-hour'> HOY 10:00 </div>
+             <div className='card-img ' onClick={()=>navigate(`/activityreserved/${act.idAct}/${act.session}`)}>
+               <img src={relative} alt="" />
+               
+              <label >{act.nameAct}</label>
+             </div>
+             
+                          </div>)}  
+             
             ) : ""}
 
             <Navbar />
