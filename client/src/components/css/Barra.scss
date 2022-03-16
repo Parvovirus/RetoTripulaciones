@@ -1,12 +1,12 @@
 .cont-barra {
     display        : flex;
     justify-content: center;
-    padding-top    : 55%;
+    padding-top    : 12%;
 
 
     >.blackposition {
         width        : 33%;
-        height       : 5px;
+        height       : 4px;
         left         : calc(50% - 134px/2);
         background   : #000000;
         border-radius: 100px;
@@ -21,7 +21,7 @@
 
     >.blackposition {
         width        : 33%;
-        height       : 5px;
+        height       : 4px;
         left         : calc(50% - 134px/2);
         background   : #000000;
         border-radius: 100px;
@@ -37,15 +37,15 @@
     background-color: white;
     display         : flex;
     justify-content : center;
-    
+
 
     >.blackposition {
         width        : 33%;
-        height       : 5px;
+        height       : 4px;
         left         : calc(50% - 134px/2);
         background   : #000000;
         border-radius: 100px;
-        
+
     }
 }
 
@@ -58,16 +58,14 @@
     background-color: white;
     display         : flex;
     justify-content : center;
-    
+
 
     >.blackposition {
         width        : 33%;
-        height       : 5px;
+        height       : 4px;
         left         : calc(50% - 134px/2);
         background   : #000000;
         border-radius: 100px;
-        
+
     }
 }
-
-

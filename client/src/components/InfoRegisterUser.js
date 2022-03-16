@@ -15,6 +15,11 @@ function InfoRegisterUser(props) {
   const [tlfUser, setTlfUser] = useState("");
   const [dateUser, setDateUser] = useState("");
 
+  const [styleHouse, setStyleHouse] = useState("icons ihome")
+  const [styleName, setStyleName] = useState("")
+  const [styleIphone, setStyleIphone] = useState("")
+  const [styleAge, setStyleAge] = useState("")
+
   // const[registerData,setRegisterData] = useState([]);
 
   const test = () => {
@@ -34,21 +39,24 @@ function InfoRegisterUser(props) {
     const idCoHousingOk = regExpCode.test(idCoHousing);
     const nameUserOk = regExpName.test(nameUser);
     const tlfUserOk = regExpTlf.test(tlfUser);
-    const dateUserOk = ( dateUser > 1912 && dateUser < 1967); 
-  
+    const dateUserOk = (dateUser > 1912 && dateUser < 1967);
 
-    
+   {idCoHousingOk ? setStyleHouse("icons ihome"): setStyleHouse("icons ihome ihomegreen") }
+
+
+
     if (!idCoHousingOk | !nameUserOk | !tlfUserOk | !dateUserOk) {
       alert("revisa los campos");
     } else {
-      
-      console.log(filtro)
+
+
       axios.post("checkdata", filtro).then((res) => {
         alert(res.data.message);
         if (res.data.dataRegisterUser) {
           props.saveDataUser(res.data.dataRegisterUser);
           props.hidden(false);
           props.show(true);
+          console.log(res.data.message)
         }
       });
     }
@@ -57,13 +65,15 @@ function InfoRegisterUser(props) {
   return (
     <div className="cnt-infregist">
 
-      <Link to={"/"}> <img className="buttonBack" src={Buttonb} ></img></Link>
+      <Link to={"/"}> <img className={styleHouse} src={Buttonb} ></img></Link>
       <h2 className="titleCreate">Crear una cuenta</h2>
 
       <div className="InfoRegisterUser">
 
         <label>Código Co-Housing</label>
         <div>
+
+          {idCoHousing ? console.log(idCoHousing) : ""}
           <img className="icons ihome" src={Home}></img>
           <input
             type="number"
