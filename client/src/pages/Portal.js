@@ -7,6 +7,8 @@ import Buttonb from "../components/icons/Buttonb.png"
 import axios from 'axios'
 import Navbar from '../components/Navbar'
 import useAxiosAuth from "../hooks/useAxiosAuth";
+import BarraPortal from '../components/BarraPortal';
+
 
 
 const Portal = () => {
@@ -62,9 +64,10 @@ const Portal = () => {
 
       {viewCategories ? <div className='navbar-top-fixed'>
 
-        <div className='perfilname'>
-          {user && auth ?
-            <img src={user.data.data[0].avatar}></img> : ""}
+      <div className='perfilname'>
+          {user && auth ? user.data.data[0].idUser == 1 ?
+
+            <img src={require("../img/Mari.png")}></img> : <img src={user.data.data[0].avatar}></img> : ""}
           {user && auth ?
             <span> Hola, <span className="namebold">{user.data.data[0].name}</span></span>
             : ""}
@@ -92,7 +95,9 @@ const Portal = () => {
       </div>
 
 
-      <Navbar />
+      {viewCategories ? <Navbar /> : ""}
+      <BarraPortal />
+
 
     </div >
   )

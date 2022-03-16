@@ -116,13 +116,15 @@ const Activities = () => {
       for (let index = filterLength; index < circlesArray.length; index++) {
         filtrado.push(circlesArray[index]);
       }
+
+      require("../img/MariD.png")
       
       console.log(filtrado)
       let datos = filtrado.map((user, i) => {
         return (
           <div key={i}>
             <img
-              src={user.avatar}
+              src={user.idUser==1? require("../img/MariD.png") : user.avatar}
             /*   onClick={() =>
                 user.avatar == "../img/circle.jpg" ? savePlan(1) : ""
               } */
@@ -150,7 +152,7 @@ const Activities = () => {
         return (
           <div key={i}>
             <img
-              src={user.avatar}
+               src={user.idUser==1? require("../img/MariD.png") : user.avatar}
             /*   onClick={() =>
                 user.avatar == "../img/circle.jpg" ? savePlan(2) : ""
               } */
@@ -177,7 +179,7 @@ const Activities = () => {
         return (
           <div key={i}>
             <img
-              src={user.avatar}
+                 src={user.idUser==1? require("../img/MariD.png") : user.avatar}
               /* onClick={() =>
                 user.avatar == "../img/circle.jpg" ? savePlan(3) : ""
               } */
@@ -280,7 +282,7 @@ const Activities = () => {
       </div>
       <div>
         {" "}
-        <h2>Plazas Disponibles</h2>
+        <p className="titles-sesiones">Plazas Disponibles</p>
       </div>
       <div className="participants">{paintUsers()}
 

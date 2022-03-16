@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar'
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import useAxiosAuth from '../hooks/useAxiosAuth';
+import BarraPlanes from '../components/BarraPlanes';
  
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./css/Planes.scss"
@@ -49,7 +50,7 @@ const Planes = () => {
 
     }
 
-console.log(allActivities)
+ 
 
  
      return (
@@ -76,6 +77,8 @@ console.log(allActivities)
             ) : ""}
 
             <Navbar />
+      
+         
         </div>
     )
 }

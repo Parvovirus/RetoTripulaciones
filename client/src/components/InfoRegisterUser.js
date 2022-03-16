@@ -1,12 +1,21 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom'
 import "./css/InfoRegisterUser.scss";
-import Buttonb from "./icons/Buttonb.png"
+import Buttonb from "./icons/Buttonb.png";
+
 import Home from "./icons/Home.png";
+import HomeGreen from "./icons/HomeGreen.png";
+
 import Name from "./icons/Profile.png";
+import NameGreen from "./icons/ProfileGreen.png";
+
 import Tlf from "./icons/Call.png";
+import TlfGreen from "./icons/CallGReen.png";
+
 import Age from "./icons/Calandar.png";
+import AgeGreen from "./icons/CalandarGreen.png";
+
 
 function InfoRegisterUser(props) {
   const [idCoHousing, setidCoHousing] = useState("");
@@ -14,7 +23,39 @@ function InfoRegisterUser(props) {
   const [tlfUser, setTlfUser] = useState("");
   const [dateUser, setDateUser] = useState("");
 
-  // const[registerData,setRegisterData] = useState([]);
+  const [styleHouse, setStyleHouse] = useState("")
+  const [styleName, setStyleName] = useState("")
+  const [styleIphone, setStyleIphone] = useState("")
+  const [styleAge, setStyleAge] = useState("");
+
+  const [styleBorderHouse, setStyleBorderHouse] = useState()
+  const [styleBorderName, setStyleBorderName] = useState()
+  const [styleBorderTlf, setStyleBorderTlf] = useState()
+  const [styleBorderDate, setStyleBorderDate] = useState()
+
+  useEffect(() => {
+
+    var regExpCode = new RegExp(/\d{9}/);
+    var regExpName = new RegExp(/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]+$/u);
+    var regExpTlf = new RegExp(/\d{9}/);
+    const idCoHousingOk = regExpCode.test(idCoHousing);
+    const nameUserOk = regExpName.test(nameUser);
+    const tlfUserOk = regExpTlf.test(tlfUser);
+    const dateUserOk = (dateUser > 1912 && dateUser < 1967);
+
+    idCoHousingOk ? setStyleHouse(true) : setStyleHouse(false);
+    // idCoHousingOk ? setStyleBorderHouse("border-green") : setStyleBorderHouse("border-normal");
+
+    nameUserOk ? setStyleName(true) : setStyleName(false);
+    // nameUserOk ? setStyleBorderName("border-green") : setStyleBorderHouse("border-normal");
+
+    tlfUserOk ? setStyleIphone(true) : setStyleIphone(false);
+    // tlfUserOk ? setStyleBorderTlf("border-green") : setStyleBorderHouse("border-normal");
+
+    dateUserOk ? setStyleAge(true) : setStyleAge(false);
+    // dateUserOk ? setStyleBorderDate("border-green") : setStyleBorderHouse("border-normal");
+
+  }, [idCoHousing, nameUser, tlfUser, dateUser])
 
   const test = () => {
 
@@ -25,32 +66,22 @@ function InfoRegisterUser(props) {
       dateUser,
     };
 
-    var regExpCode = new RegExp(/\d{9}/);
-    var regExpName = new RegExp(/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]+$/u);
-    var regExpTlf = new RegExp(/\d{9}/);
-    // var regExpBirth = new RegExp(/^(19[123456])\d[1234567]{1}\d/);
 
-    const idCoHousingOk = regExpCode.test(idCoHousing);
-    const nameUserOk = regExpName.test(nameUser);
-    const tlfUserOk = regExpTlf.test(tlfUser);
-    const dateUserOk = ( dateUser > 1912 && dateUser < 1967); 
-    // console.log(idCoHousingOk)
-    // console.log(nameUserOk)
-    // console.log(tlfUserOk)
-    // console.log(dateUserOk)
 
-    
-    if (!idCoHousingOk | !nameUserOk | !tlfUserOk | !dateUserOk) {
+
+
+    if (!styleHouse | !styleName | !styleIphone | !styleAge) {
       alert("revisa los campos");
     } else {
-      
-      console.log(filtro)
+
+
       axios.post("checkdata", filtro).then((res) => {
         alert(res.data.message);
         if (res.data.dataRegisterUser) {
           props.saveDataUser(res.data.dataRegisterUser);
           props.hidden(false);
           props.show(true);
+          console.log(res.data.message)
         }
       });
     }
@@ -58,15 +89,17 @@ function InfoRegisterUser(props) {
 
   return (
     <div className="cnt-infregist">
-
       <Link to={"/"}> <img className="buttonBack" src={Buttonb} ></img></Link>
       <h2 className="titleCreate">Crear una cuenta</h2>
 
       <div className="InfoRegisterUser">
 
         <label>Código Co-Housing</label>
-        <div>
-          <img className="icons ihome" src={Home}></img>
+
+        <div className="border-green">
+
+
+          <img className="icons ihome" src={styleHouse ? HomeGreen : Home}></img>
           <input
             type="number"
             placeholder="000-000-000"
@@ -76,8 +109,8 @@ function InfoRegisterUser(props) {
         </div>
 
         <label>Nombre y Apellido</label>
-        <div>
-          <img className="icons iname" src={Name}></img>
+        <div className={styleBorderName}>
+          <img className="icons iname" src={styleName ? NameGreen : Name}></img>
           <input
             type="text"
             placeholder="Alberto Fernández"
@@ -86,8 +119,8 @@ function InfoRegisterUser(props) {
         </div>
 
         <label>Número de Teléfono</label>
-        <div>
-          <img className="icons itlf" src={Tlf}></img>
+        <div className={styleBorderTlf}>
+          <img className="icons itlf" src={styleIphone ? TlfGreen : Tlf}></img>
           <input
             type="number"
             placeholder="600 000 000"
@@ -96,9 +129,9 @@ function InfoRegisterUser(props) {
 
         </div>
         <label>Año de Nacimiento</label>
-        <div>
+        <div className={styleBorderDate}>
 
-          <img className="icons iage" src={Age}></img>
+          <img className="icons iage" src={styleAge ? AgeGreen : Age}></img>
           <input
             type="text"
             placeholder="1950"
@@ -108,7 +141,7 @@ function InfoRegisterUser(props) {
         </div>
         <button onClick={test}>Continuar</button>
       </div>
-    </div>
+    </div >
 
   );
 }

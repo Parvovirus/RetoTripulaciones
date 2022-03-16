@@ -12,7 +12,7 @@ function App() {
       <BrowserRouter>
         <Bateria />
         <Main />
-        <Barra />
+     
       </BrowserRouter>
     </div>
   );
