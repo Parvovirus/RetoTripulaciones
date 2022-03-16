@@ -286,12 +286,12 @@ const Activities = () => {
 
 
       </div>
+
       <div className="container-subscription-button  ">  {session!=undefined? <button onClick={()=>savePlan()} className="login">
             Apuntarme
           </button> : "" }</div>
-
-
       <Navbar />
+
     </div>
   );
 };
