@@ -114,14 +114,60 @@ const user = {
   savePlan: async (req, res) => {
     const { idUser, session, idActivity } = req.body;
 
+ 
+    let idParser = parseInt(idActivity);
+    let sessionParser = parseInt(session)
+ 
+
+    const userData = await userModel.find({ idUser});
+
+/*     console.log(userData[0].activities) */
+    
+    let result =  userData[0].activities.filter((act)=>act.idActivity ==idParser)
+
+  
+   
+
+    if(result[0]!=null){
+
+      console.log("entra en result")
+      const query = { idUser };
+      const update = { $set: { 'activities.$[elem].status': 'process' ,'activities.$[elem].session': sessionParser} };
+      const options = { new: true, arrayFilters: [{ 'elem.idActivity': idParser }]};
+      await userModel.findOneAndUpdate(query, update, options); 
+    }else{
+
+      console.log("entra en nmo  result")
+      const query = { idUser };
+const update = { $push: {  activities : { status: 'process' ,session: sessionParser , date: "16/03/2022"  ,idActivity: idParser} }}
+ 
+await userModel.findOneAndUpdate(query, update );
+    }  
+    
+ 
+
+/* 
+const query = { idUser };
+const update = { $set: { 'activities.$[elem].status': 'process' ,'activities.$[elem].session': session} };
+const options = { new: true, arrayFilters: [{ 'elem.idActivity': idParser }]};
+await userModel.findOneAndUpdate(query, update, options);
+ */
+ 
+  },
+  deletePlan: async (req, res) => {
+    const { idUser, session, idActivity } = req.body;
+
     console.log(req.body)
     let idParser = parseInt(idActivity);
+    let sessionParaser = parseInt(session)
 
-    let arrayClean = [];
+   /*  let arrayClean = [];
 
     const userData = await userModel.find({ idUser });
 
     let userClean = userData[0].activities;
+
+
 
     for (let index = 0; index < userClean.length; index++) {
       const element = userClean[index];
@@ -132,73 +178,23 @@ const user = {
     }
 
     arrayClean.push({
-      idActivity: idActivity,
-      status: "process",
-      session,
+      idActivity: idParser,
+      status: "none",
+      sessionParaser,
       date: "01/03/2022",
 
     });
-
-///OK
-  /*   await userModel.findOneAndUpdate(
-      { idUser },
-      { $pull: { activities: { idActivity: 1 } } },
-      { safe: true, multi: false }
-    ); */
- 
-//////ok
-
-
-const query = { idUser };
-const update = { $set: { 'activities.$[elem].status': 'process' ,'activities.$[elem].session': session} };
-const options = { new: true, arrayFilters: [{ 'elem.idActivity': idParser }]};
-await userModel.findOneAndUpdate(query, update, options);
-
-
-
-
-
-    /*  let filtrado = userClean.filter((user)=>user.activities[0].idActivity!==1) */
-
-    /*     let filtrado = userData[0].filter((user)=>user.activities.idActivity!==1)
-
-    console.log(filtrado )
- */
-
-    /* 
-
-  userModel.findOneAndUpdate(
-      {idUser, 
-        
-        activities: {$elemMatch: {idActivity: idlimio}}},
-      {$set: {'activities.$.status': "process" }}, // list fields you like to change
-      {'new': true, 'safe': true, 'upsert': true});
-
-
-      console.log(data) */
-    /*  await userModel.findOneAndUpdate(
-      { idUser},
-      { $push: {activities: { arrayClean[]}  } },
-    
-    ); */
-
-    /*   
-  console.log("entraaaaaaaa")
- 
-  for (let index = 0; index < newOrder.length; index++) {
-    
-
-    order.push(prueba);
-  }
- */
-
-    /*   await OrderModel.findOneAndUpdate(
-    { idOrder: orderAllData.idOrder },
-    { $push: { order:  order } },
-  
-  );
-
   */
+
+     
+     
+
+ const query = { idUser };
+const update = { $set: { 'activities.$[elem].status': 'none' ,'activities.$[elem].session': sessionParaser}  };
+const options = { new: true, arrayFilters: [{ 'elem.idActivity': idParser }]};
+await userModel.findOneAndUpdate(query, update, options); 
+
+ 
   },
 };
 

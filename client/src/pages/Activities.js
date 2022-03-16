@@ -35,17 +35,19 @@ const Activities = () => {
         (dat) => dat.idActivity == idact
       );
 
-      if (demos) {
+      /* if (demos) {
         if (demos[0].status == "process") {
           setSubscription({
             status: true,
             session: demos[0].session,
           });
         } else if (demos[0].status !== "process") {
+          console.log("demos no existe")
         }
       } else {
 
-      }
+       
+      } */
 
       setIdUser(datauser.data.data[0].idUser);
     }
@@ -72,6 +74,8 @@ const Activities = () => {
         (act) => act.activities[0].idActivity == `${idActivity}`
       );
 
+   
+
       setUsers(userss);
     });
   };
@@ -83,6 +87,8 @@ const Activities = () => {
       idUser: idUser,
       status: "none",
     };
+
+    console.log(obj)
 
 
 
@@ -110,21 +116,22 @@ const Activities = () => {
       for (let index = filterLength; index < circlesArray.length; index++) {
         filtrado.push(circlesArray[index]);
       }
-
+      
+      console.log(filtrado)
       let datos = filtrado.map((user, i) => {
         return (
           <div key={i}>
             <img
               src={user.avatar}
-              onClick={() =>
+            /*   onClick={() =>
                 user.avatar == "../img/circle.jpg" ? savePlan(1) : ""
-              }
+              } */
             />
           </div>
         );
       });
 
-      return datos;
+      return datos.reverse();
     } else if (session == 2) {
       let filtrado = users.filter((act) => {
         if (act.activities[0].session == session) {
@@ -139,18 +146,19 @@ const Activities = () => {
         filtrado.push(circlesArray[index]);
       }
 
-      return filtrado.map((user, i) => {
+      let datos=  filtrado.map((user, i) => {
         return (
           <div key={i}>
             <img
               src={user.avatar}
-              onClick={() =>
+            /*   onClick={() =>
                 user.avatar == "../img/circle.jpg" ? savePlan(2) : ""
-              }
+              } */
             />
           </div>
         );
       });
+      return datos.reverse();
     } else if (session == 3) {
       let filtrado = users.filter((act) => {
         if (act.activities[0].session == session) {
@@ -165,18 +173,19 @@ const Activities = () => {
         filtrado.push(circlesArray[index]);
       }
 
-      return filtrado.map((user, i) => {
+      let datos =  filtrado.map((user, i) => {
         return (
           <div key={i}>
             <img
               src={user.avatar}
-              onClick={() =>
+              /* onClick={() =>
                 user.avatar == "../img/circle.jpg" ? savePlan(3) : ""
-              }
+              } */
             />
           </div>
         );
       });
+      return datos.reverse();
     }
   };
 
@@ -191,7 +200,7 @@ const Activities = () => {
       ) {
         return (
 
-          <button className=" register">
+          <button className="login">
             Cancelar subscripción
           </button>
 
@@ -204,7 +213,7 @@ const Activities = () => {
       ) {
         return (
 
-          <button className=" register">
+          <button className="login">
             Cancelar subscripción
           </button>
 
@@ -217,15 +226,17 @@ const Activities = () => {
       ) {
         return (
 
-          <button className=" register">
+          <button className="login">
             Cancelar subscripción
           </button>
 
         );
       }
     } else {
+    
     }
   };
+ 
   return (
     <div className="Activity1">
       {/* Banner de la actividad */}
@@ -248,6 +259,7 @@ const Activities = () => {
                   className="buttons-sessions"
                   onClick={() => setSession(act.numberSession)}
                   key={i}
+                
                 >
                {act.numberSession==1? "Hoy: 10:00" : ""}
                {act.numberSession==2? "Sábado: 10:00" : ""}
@@ -274,7 +286,9 @@ const Activities = () => {
 
 
       </div>
-      <div className="container-subscription-button  ">{paintButton()}</div>
+      <div className="container-subscription-button  ">  {session!=undefined? <button onClick={()=>savePlan()} className="login">
+            Apuntarme
+          </button> : "" }</div>
 
 
       <Navbar />
