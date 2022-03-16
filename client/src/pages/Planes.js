@@ -65,15 +65,7 @@ console.log(allActivities)
                 console.log(relative)
 
                 return(
-           /*  <div key={i} className="card-container">
-<div className='card-hour'> HOY 10:00 </div>
-<div className='card-img ' onClick={()=>navigate(`/activityreserved/${act.idAct}/${act.session}`)} style={ {  backgroundImage:`url(${relative} )`,filter: "brightness(0.5)" , backgroundSize: 'cover' ,   }}>
-  
-  
- <label >{act.nameAct}</label>
-</div>
-
-             </div>)}   */
+     
 
              <div key={i} className="card-container">
              <div className='card-hour'> HOY 10:00 </div>
