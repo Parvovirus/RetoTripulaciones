@@ -264,7 +264,6 @@ const Activities = () => {
 
           <p>Pedro Álvarez</p>
           {dataActivity ? <div><p>Monitor de {dataActivity.name}</p></div> : ""}
-
         </div>
       </div>
       <div>
