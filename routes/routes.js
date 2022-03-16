@@ -17,6 +17,7 @@ router.post("/deleteplan",user.deletePlan)
 
 router.get("/getcategory", category.getCategories);
 
+
 router.get("/getactivities", activities.getActivities);
  
 router.post("/getactivitiesuser", activities.getActivitiesUser);
