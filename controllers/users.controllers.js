@@ -3,7 +3,7 @@ const userModel = require("../models/users.model");
 const colivingModel = require("../models/coliving.model");
 const activitiesModel = require("../models/activity.model");
 const jwt = require("jsonwebtoken");
-
+ 
 const user = {
   checkData: async (req, res) => {
     const { idCoHousing, nameUser, tlfUser, dateUser } = req.body;
@@ -22,13 +22,13 @@ const user = {
           existVeriCohUser = tlfUser;
         }
       }
-      console.log(existVeriCohUser);
+ 
 
       //Si está en la whiteList
       if (existVeriCohUser) {
         //  console.log("Cohouse tiene registrado tlf en su guia, puede registrarse el user")
         const checkExistUser = await userModel.findOne({ phone: tlfUser });
-        console.log(checkExistUser);
+   
 
         if (checkExistUser) {
           res.json({ message: "Ya estaba registrada " });
@@ -58,12 +58,12 @@ const user = {
     }
   },
 
+ 
   login: async (req, res) => {
     const { phone } = req.body;
 
     const existUser = await userModel.findOne({ phone });
-    console.log("code");
-    console.log(existUser);
+  
     try {
       if (existUser != null) {
         payload = {
@@ -130,14 +130,14 @@ const user = {
 
     if(result[0]!=null){
 
-      console.log("entra en result")
+   
       const query = { idUser };
       const update = { $set: { 'activities.$[elem].status': 'process' ,'activities.$[elem].session': sessionParser} };
       const options = { new: true, arrayFilters: [{ 'elem.idActivity': idParser }]};
       await userModel.findOneAndUpdate(query, update, options); 
     }else{
 
-      console.log("entra en nmo  result")
+   
       const query = { idUser };
 const update = { $push: {  activities : { status: 'process' ,session: sessionParser , date: "16/03/2022"  ,idActivity: idParser} }}
  
@@ -157,7 +157,7 @@ await userModel.findOneAndUpdate(query, update, options);
   deletePlan: async (req, res) => {
     const { idUser, session, idActivity } = req.body;
 
-    console.log(req.body)
+ 
     let idParser = parseInt(idActivity);
     let sessionParaser = parseInt(session)
 

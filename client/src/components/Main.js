@@ -10,7 +10,8 @@ import "./css/Main.scss"
 import FaceId from './FaceId'
 import Reserved from "../pages/Reserved"
 import ActivityReserved from '../pages/ActivityReserved'
-
+import Recomendador from './Recomendador'
+ 
 
 
 const Main = () => {
@@ -28,6 +29,7 @@ const Main = () => {
         <Route path='/reserved/:id' element={<Reserved />} />
         <Route path='/faceid' element={<FaceId />} />
         <Route path='/activityreserved/:idact/:sessionact' element={<ActivityReserved />} />
+        <Route path='/recomendador' element={<Recomendador />} />
 
       </Routes>
 

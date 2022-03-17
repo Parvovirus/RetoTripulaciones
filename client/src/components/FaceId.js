@@ -15,7 +15,7 @@ const FaceId = () => {
   useEffect(() => {
     if (auth === true) {
       setTimeout(() => {
-        console.log("/portal")
+       
         navigate("/portal")
       }, 5000);
 
@@ -23,7 +23,7 @@ const FaceId = () => {
     } else if (auth === false) {
       setTimeout(() => {
         navigate("/");
-        console.log("/home");
+     
       }, 5000)
     }
   }, [auth])

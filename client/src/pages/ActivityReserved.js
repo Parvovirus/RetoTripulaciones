@@ -95,7 +95,7 @@ const ActivityReserved = () => {
       status: "none",
     };
 
-    console.log(obj)
+ 
 
 
     axios.post("/deleteplan", obj);
@@ -136,7 +136,7 @@ const ActivityReserved = () => {
 
         }
 
-        console.log(filtrado)
+     
   
      
   

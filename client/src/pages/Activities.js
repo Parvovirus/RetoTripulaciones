@@ -88,8 +88,7 @@ const Activities = () => {
       status: "none",
     };
 
-    console.log(obj)
-
+ 
 
 
     axios.post("/saveplan", obj);
@@ -108,7 +107,7 @@ const Activities = () => {
         }
       });
 
-      console.log(filtrado.length);
+ 
       let length = 20 - filtrado.length;
 
       let filterLength = 20 - length;
@@ -119,7 +118,7 @@ const Activities = () => {
 
       require("../img/MariD.png")
       
-      console.log(filtrado)
+    
       let datos = filtrado.map((user, i) => {
         return (
           <div key={i}>

@@ -59,7 +59,7 @@ const Planes = () => {
             {allActivities ? allActivities.map((act, i) =>{
                 
                 let relative = require(`${act.bannerSelec}`)
-                console.log(relative)
+              
 
                 return(
      

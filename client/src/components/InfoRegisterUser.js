@@ -81,7 +81,7 @@ function InfoRegisterUser(props) {
           props.saveDataUser(res.data.dataRegisterUser);
           props.hidden(false);
           props.show(true);
-          console.log(res.data.message)
+      
         }
       });
     }
