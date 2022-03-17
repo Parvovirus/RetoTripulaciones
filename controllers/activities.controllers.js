@@ -63,7 +63,7 @@ const activity = {
         }
 
  
-console.log(arrayPlanes)
+ 
 
      
      

@@ -101,7 +101,7 @@ const Activities = () => {
         }
       });
 
-      console.log(filtrado.length);
+ 
       let length = 20 - filtrado.length;
 
       let filterLength = 20 - length;
