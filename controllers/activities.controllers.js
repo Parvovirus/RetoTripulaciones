@@ -9,7 +9,6 @@ const activity = {
         res.json(activities);
     },
     
-
     getOneActivity: async (req, res) => {
         const { idActivity } = req.body;
         const oneActivity = await activityModel.findOne({ idActivity });
@@ -23,26 +22,15 @@ const activity = {
 
         // let datosLimpios = activities.filter((act, i) => act.idActivity === user[0].activities[i].idActivity)
         let arrayPlanes = []
-
-
-
         let actividadesUsuario = user[0].activities
 
         for (let index = 0; index < activities.length; index++) {
             const element = activities[index];
          
-   
-
             for (let index = 0; index < actividadesUsuario.length; index++) {
                 const element2 = actividadesUsuario[index];
-
-              
-
                 if (element.idActivity == element2.idActivity){
-                    
-
-
-
+           
                     let obj1 = {
 
                         nameAct: element.name,
@@ -52,22 +40,13 @@ const activity = {
                         session: element2.session,
                         date: element2.date,
                         bannerSelec: element.bannerSelec
-
                     }
-          
-                    arrayPlanes.push(obj1)
 
+                    arrayPlanes.push(obj1)
                 }
             }
-
         }
-
- 
-console.log(arrayPlanes)
-
-     
-     
-
+console.log(arrayPlanes);
         res.json(arrayPlanes);
     },
 
